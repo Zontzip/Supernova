@@ -1,3 +1,4 @@
-class Bullet extends GameObject {
+class Bullet extends GameObject 
+{
   
 }

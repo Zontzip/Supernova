@@ -1,3 +1,4 @@
-class Star extends GameObject {
+class Star extends GameObject 
+{
   
 }
