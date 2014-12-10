@@ -1,4 +1,4 @@
-Space Fighter
+Supernova WIP
 =========
 
 OOP Assignment 2.
