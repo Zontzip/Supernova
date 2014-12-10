@@ -69,6 +69,14 @@ class Ship extends GameObject
           theta += 0.1f;
           break;  
         case ' ':
+          if (ellapsed > toPass) {
+            Bullet bullet = new Bullet();
+            bullet.x = x;
+            bullet.y = y;
+            bullet.theta = theta;
+            objects.add(bullet);
+            ellapsed = 0.0f;
+          }
       }
     }
   }
