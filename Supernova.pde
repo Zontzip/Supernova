@@ -1,6 +1,6 @@
  void setup() 
 {
-   size(500, 500);
+   size(1000, 800);
    objects.add(new Ship(100, 100)); 
 }
 
