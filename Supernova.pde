@@ -18,5 +18,6 @@ void draw()
   {
     objects.get(i).move();
     objects.get(i).display();
+    objects.get(i).die();
   } 
 }

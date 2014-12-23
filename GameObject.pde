@@ -9,4 +9,7 @@ class GameObject
   
   void display() {
   }
+  
+  void die() {
+  }
 }
