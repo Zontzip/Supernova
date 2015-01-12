@@ -42,13 +42,13 @@ class Ship extends GameObject
         
         break;
       case 's':
-        y = y + 1;
+        y = y + speed;
         break;
       case 'a':
-        theta -= 0.2f;
+        theta -= 0.15f;
         break;
       case 'd':
-        theta += 0.2f;
+        theta += 0.15f;
         break;  
       case ' ':
         if (ellapsed > toPass) {
@@ -76,12 +76,13 @@ class Ship extends GameObject
 
     stroke(colour);
     float halfWidth = w / 2;
-    float  halfHeight = h / 2;
+    float halfHeight = h / 2;
 
     line(-halfWidth, halfHeight, 0, - halfHeight);
     line(0, - halfHeight, halfWidth, halfWidth);
     line(halfWidth, halfHeight, 0, 0);
     line(0, 0, - halfWidth, halfHeight);
+    
     popMatrix();
   }
 }

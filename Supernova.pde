@@ -2,6 +2,8 @@
 {
    size(1000, 800);
    objects.add(new Ship(100, 100)); 
+   objects.add(new Star());
+   objects.add(new Blackhole());
 }
 
 ArrayList<GameObject> objects = new ArrayList<GameObject>();

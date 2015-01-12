@@ -1,17 +1,16 @@
 class Blackhole extends GameObject
 {
-  float x, y;
-  
-  Blackhole(float x, float y)
+  Blackhole()
   {
-    this.x = x;
-    this.y = y;
+    this.x = random(0, width);
+    this.y = random(0, height);
   }
   
   void display()
   {
-    pushMatrix();
+    fill(#FFFFFF);
+    stroke(#FFFFFF);
     
-    popMatrix();
+    ellipse(x, y, 40, 40);
   }
 }
