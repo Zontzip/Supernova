@@ -2,8 +2,8 @@ class Star extends GameObject
 { 
   Star()
   {
-    this.x = x;
-    this.y = y;
+    this.x = width/2;
+    this.y = height/2;
   }
   
   void display()
@@ -13,7 +13,7 @@ class Star extends GameObject
     fill(#F58207);
     stroke(#F6FF0D);
     
-    ellipse(width/2, height/2, 50, 50);
+    ellipse(x, y, 50, 50);
     
     popMatrix();
   }

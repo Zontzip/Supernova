@@ -24,6 +24,7 @@ class Bullet extends GameObject
   
   void display()
   {
+    stroke(#CE0C0C);
     pushMatrix();
     translate(x, y);
     rotate(theta);
@@ -35,7 +36,7 @@ class Bullet extends GameObject
   {
     if (millis() - alive >= 5000) 
     {
-      println("Lazerz offline");
+      println("Lazer offline");
       objects.remove(this);
       alive = millis();
     }

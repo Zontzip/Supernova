@@ -2,6 +2,9 @@ class Ship extends GameObject
 {
   float w, h;
   float speed;
+  
+  float halfWidth;
+  float halfHeight;
 
   // firerate variables
   float timeDelta = 1.0f/60.0f;
@@ -17,6 +20,8 @@ class Ship extends GameObject
     this.y += 10;
     h = 20;
     w = 20;
+    halfWidth = w / 2;
+    halfHeight = h / 2;
     colour = color(255);
     theta = 0;
   }
@@ -25,9 +30,11 @@ class Ship extends GameObject
   {
     ellapsed += timeDelta;
     speed = 5;
+    
     float lx, ly;
     lx = sin(theta);
     ly = -cos(theta);
+    
     if (keyPressed)
     {
       switch (key)
@@ -35,11 +42,6 @@ class Ship extends GameObject
       case 'w':
         x += lx * speed;
         y += ly * speed;
-        
-        print("theta: " + theta + "\n" );
-        print("lx  =  " + lx + "  ly  =  " + ly + "\n");
-        print("x  =  " + x + "  y  =  " + y + "\n\n");
-        
         break;
       case 's':
         y = y + speed;
@@ -60,7 +62,8 @@ class Ship extends GameObject
           ellapsed = 0.0f;
         }
       }
-      
+    
+    // Screen boundry
     if (x < 0) {x = width; }
     if (x > width) {x = 0; }
     if (y < 0) {y = height; }
@@ -70,19 +73,16 @@ class Ship extends GameObject
 
   void display()
   {
+    stroke(colour);
+    
+    // Ship
     pushMatrix();
     translate(x, y);   
     rotate(theta);
-
-    stroke(colour);
-    float halfWidth = w / 2;
-    float halfHeight = h / 2;
-
     line(-halfWidth, halfHeight, 0, - halfHeight);
     line(0, - halfHeight, halfWidth, halfWidth);
     line(halfWidth, halfHeight, 0, 0);
     line(0, 0, - halfWidth, halfHeight);
-    
     popMatrix();
   }
 }

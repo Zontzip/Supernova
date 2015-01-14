@@ -4,6 +4,7 @@
    objects.add(new Ship(100, 100)); 
    objects.add(new Star());
    objects.add(new Blackhole());
+   objects.add(new Asteroid());
 }
 
 ArrayList<GameObject> objects = new ArrayList<GameObject>();
