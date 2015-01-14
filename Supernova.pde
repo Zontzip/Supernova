@@ -1,12 +1,16 @@
- void setup() 
+void setup() 
 {
    size(1000, 800);
    objects.add(new Ship(100, 100)); 
    objects.add(new Star());
    objects.add(new Blackhole());
-   objects.add(new Asteroid());
+   while (i < 3) {
+     objects.add(new Asteroid());
+     i++;
+   }
 }
 
+int i = 0;
 ArrayList<GameObject> objects = new ArrayList<GameObject>();
 
 void draw()
@@ -17,6 +21,8 @@ void draw()
     case 2: exit();
   }*/
   background(0);
+  strokeWeight(2);
+  
   for (int i = 0; i < objects.size(); i ++)
   {
     objects.get(i).move();

@@ -20,6 +20,16 @@ class Asteroid extends GameObject
   
   void display()
   {
-    line(x, y, x + 10, y - 10);
+    line(x, y, x - 10, y + 20);
+    line(x - 10, y + 20, x, y + 20);
+    line(x, y + 20, x + 5, y + 15);
+    line(x + 5, y + 15, x + 15, y + 20);
+    line(x + 15, y + 20, x + 20, y + 20);
+    line(x + 20, y + 20, x + 15, y + 10);
+    line(x + 15, y + 10, x + 20, y + 20);
+    line(x + 15, y + 10, x + 20, y);
+    line(x + 20, y, x + 15, y - 5);
+    line(x + 15, y - 5, x + 10, y);
+    line(x + 10, y, x, y);
   }
 }
