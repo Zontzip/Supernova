@@ -54,6 +54,10 @@ class Ship extends GameObject
         break;  
       case ' ':
         if (ellapsed > toPass) {
+          // Sound effect
+          player = minim.loadFile("laser.aiff", 2048);
+          player.play();
+          
           Bullet bullet = new Bullet();
           bullet.x = x;
           bullet.y = y;

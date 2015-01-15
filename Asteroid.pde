@@ -20,6 +20,7 @@ class Asteroid extends GameObject
   
   void display()
   {
+    pushMatrix();
     line(x, y, x - 10, y + 20);
     line(x - 10, y + 20, x, y + 20);
     line(x, y + 20, x + 5, y + 15);
@@ -31,5 +32,6 @@ class Asteroid extends GameObject
     line(x + 20, y, x + 15, y - 5);
     line(x + 15, y - 5, x + 10, y);
     line(x + 10, y, x, y);
+    popMatrix();
   }
 }

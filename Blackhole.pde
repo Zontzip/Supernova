@@ -20,17 +20,13 @@ class Blackhole extends GameObject
     fill(0);
     
     pushMatrix();
-    
     ellipse(x, y, 40, 40);
-    
     translate(x, y);
-    
     float ang = TWO_PI * millis()/orbitDuration;
     float x = cos(ang)*orbitRad;
     float y = sin(ang)*orbitRad;
     ellipse(x, y, 2, 2);
     line (x + 10, y, x + 5, y + 5);
-    
     popMatrix();
   }
 }

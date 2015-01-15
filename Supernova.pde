@@ -1,17 +1,25 @@
+ArrayList<GameObject> objects = new ArrayList<GameObject>();
+int i = 0;
+
+import ddf.minim.*;
+
+AudioPlayer player;
+Minim minim;
+
 void setup() 
 {
    size(1000, 800);
    objects.add(new Ship(100, 100)); 
-   objects.add(new Star());
-   objects.add(new Blackhole());
+   objects.add(new UFO());
+   //objects.add(new Star());
+   //objects.add(new Blackhole());
    while (i < 3) {
      objects.add(new Asteroid());
      i++;
    }
+   
+  minim = new Minim(this);
 }
-
-int i = 0;
-ArrayList<GameObject> objects = new ArrayList<GameObject>();
 
 void draw()
 {
@@ -29,4 +37,8 @@ void draw()
     objects.get(i).display();
     objects.get(i).die();
   } 
+}
+
+void stop()
+{
 }
