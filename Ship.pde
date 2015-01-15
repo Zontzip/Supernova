@@ -57,7 +57,7 @@ class Ship extends GameObject
           // Sound effect
           player = minim.loadFile("laser.aiff", 2048);
           player.play();
-          
+          // Generate new bullet
           Bullet bullet = new Bullet();
           bullet.x = x;
           bullet.y = y;

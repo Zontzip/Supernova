@@ -13,7 +13,8 @@ void setup()
    objects.add(new UFO());
    //objects.add(new Star());
    //objects.add(new Blackhole());
-   while (i < 3) {
+   while (i < 3) 
+   {
      objects.add(new Asteroid());
      i++;
    }

@@ -34,4 +34,17 @@ class Asteroid extends GameObject
     line(x + 10, y, x, y);
     popMatrix();
   }
+  
+  void die()
+  {
+    for (int i = 0; i < objects.size(); i++) 
+    {
+      GameObject bullet = objects.get(i);
+      if ( (bullet.x > x && bullet.x < x + 10) && (bullet.y > y && bullet.y < y + 10) ) 
+      {
+        println("hello");
+        objects.remove(this);
+      }
+    }
+  }
 }
