@@ -8,13 +8,11 @@ class Star extends GameObject
   
   void display()
   {
-    pushMatrix();
-    
     fill(#F58207);
     stroke(#F6FF0D);
     
+    pushMatrix();
     ellipse(x, y, 50, 50);
-    
     popMatrix();
   }
   

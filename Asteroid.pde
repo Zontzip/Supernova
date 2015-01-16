@@ -5,28 +5,31 @@ class Asteroid extends GameObject
   
   Asteroid()
   {
-    this.x = random(0, width);
-    this.y = 0;
+    this.x = width;
+    this.y = random(0, height);
+    this.theta = random (0, 6); 
   }
   
   void move()
   {
-    x = x - 1;
-    y = y + 1;
+    float lx, ly;
+    lx = sin(theta);
+    ly = -cos(theta);
     
-    if (y > height || x < 0) 
+    x += lx;
+    y += ly;
+    
+    if (x < 0 || x > height || y < 0|| y > height) 
     {
-      y = 0;
       x = random(0, width);
+      y = 0;
+      theta = random (0, 6);
     }
   }
   
   void display()
   {
     pushMatrix();
-    stroke(#FF1515);
-    rect(x - 5, y - 5, 30, 30);
-    stroke(#18B0EA);
     line(x, y, x - 10, y + 20);
     line(x - 10, y + 20, x, y + 20);
     line(x, y + 20, x + 5, y + 15);

@@ -64,10 +64,18 @@ class Ship extends GameObject
       }
     
     // Screen boundry
-    if (x < 0) {x = width; }
-    if (x > width) {x = 0; }
-    if (y < 0) {y = height; }
-    if (y > height) {y = 0; }
+      if (x < 0) {
+        x = width; 
+      }
+      if (x > width) {
+        x = 0; 
+      }
+      if (y < 0) {
+        y = height; 
+      }
+      if (y > height) {
+        y = 0; 
+      }
     }
   }
 

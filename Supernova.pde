@@ -19,7 +19,7 @@ void setup()
      objects.add(new Asteroid());
      i++;
    }
-   
+  
   minim = new Minim(this);
 }
 
@@ -48,13 +48,10 @@ void draw()
   }
 }
 
-void stop()
-{
-}
-
 void keyPressed() {
   
-  if (keyCode == 'p') {
+  if (keyCode == 'p') 
+  {
     if (looping) {
       noLoop();
     }

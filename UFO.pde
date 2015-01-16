@@ -20,9 +20,10 @@ class UFO extends GameObject
   
   void display()
   {
-    pushMatrix();
     stroke(#18B0EA);
     fill(0);
+    
+    pushMatrix();
     ellipse(x, y, 60, 20);
     line(x - 15, y + 10, x - 20, y + 25);
     line(x + 15, y + 10, x + 20, y + 25);
