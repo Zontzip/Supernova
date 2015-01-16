@@ -2,13 +2,18 @@ class Bullet
 {
   float x, y;
   float theta;
-  int alive = millis();
   
-  Bullet(float x, float y, float theta)
+  int alive = millis();
+  int lifeSpan;
+  color colour;
+  
+  Bullet(float x, float y, float theta, int lifeSpan, color colour)
   {
     this.x = x;
     this.y = y;
     this.theta = theta;
+    this.lifeSpan = lifeSpan;
+    this.colour = colour;
   }
   
   void move()
@@ -35,7 +40,7 @@ class Bullet
   
   void display()
   {
-    stroke(#CE0C0C);
+    stroke(colour);
     
     pushMatrix();
     translate(x, y);
@@ -46,7 +51,7 @@ class Bullet
   
   void die() 
   {
-    if (millis() - alive >= 5000) 
+    if (millis() - alive >= lifeSpan) 
     {
       println("Laser offline");
       bullets.remove(this);

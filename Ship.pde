@@ -55,10 +55,10 @@ class Ship extends GameObject
       case ' ':
         if (ellapsed > toPass) {
           // Sound effect
-          player = minim.loadFile("laser.aiff", 2048);
+          player = minim.loadFile("ship_laser.wav", 2048);
           player.play();
           // Generate new bullet
-          bullets.add(new Bullet(x, y, theta));
+          bullets.add(new Bullet(x, y, theta, 5000, #CE0C0C));
           ellapsed = 0.0f;
         }
       }

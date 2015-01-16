@@ -33,11 +33,12 @@ void draw()
   background(0);
   strokeWeight(2);
   
-  for (int i = 0; i < objects.size(); i ++)
+  for (int i = 0; i < objects.size() - 1; i ++)
   {
     objects.get(i).move();
     objects.get(i).display();
     objects.get(i).die();
+    objects.get(i).shoot();
   } 
   
   for (int i = 0; i < bullets.size(); i++)

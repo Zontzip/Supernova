@@ -1,8 +1,5 @@
 class Asteroid extends GameObject
 {
-  float hitBoxX;
-  float hitBoxY;
-  
   Asteroid()
   {
     this.x = width;
@@ -19,16 +16,24 @@ class Asteroid extends GameObject
     x += lx;
     y += ly;
     
-    if (x < 0 || x > height || y < 0|| y > height) 
-    {
-      x = random(0, width);
-      y = 0;
-      theta = random (0, 6);
+    if (x < 0) {
+        x = width; 
+    }
+    if (x > width) {
+      x = 0; 
+    }
+    if (y < 0) {
+      y = height; 
+    }
+    if (y > height) {
+      y = 0; 
     }
   }
   
   void display()
   {
+    stroke(#18B0EA);
+    
     pushMatrix();
     line(x, y, x - 10, y + 20);
     line(x - 10, y + 20, x, y + 20);
@@ -53,6 +58,7 @@ class Asteroid extends GameObject
       {
          println("Asteroid destroyed");
          objects.remove(this);
+         bullets.remove(i);
       }
     }
   }
