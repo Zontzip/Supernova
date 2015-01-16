@@ -1,4 +1,4 @@
-class UFO extends GameObject 
+class UFO extends Entity 
 {
   // firerate variables
   float timeDelta = 1.0f/60.0f;
@@ -48,13 +48,13 @@ class UFO extends GameObject
         // Sound effect
         player = minim.loadFile("ufo_laser.wav", 2048);
         player.play();
-        // Generate new bullet
-        bullets.add(new Bullet(x, y, theta, 1000, #CE0C0C));
+        // Generate new bullet with random trajectory
+        float thetaRandom = random (0, 6);
+        bullets.add(new Bullet(x, y, thetaRandom, 1000, #F2FA14));
         ellapsed = 0.0f;
       }
   }
     
-  
   void display()
   {
     stroke(#33CC33);
@@ -67,4 +67,19 @@ class UFO extends GameObject
     curve(x - 10, y + 50, x - 10, y - 10, x + 10, y - 10, x + 10, y + 50);
     popMatrix();
   }
-}
+  
+  void die()
+  {
+    for (int i = 0; i < bullets.size(); i++) 
+    {
+      Bullet bullet = (Bullet) bullets.get(i);
+      // Check x, y coordinate and colour
+      if ( (bullet.x > x - 30 && bullet.x < x + 30) && (bullet.y > y - 20 && bullet.y < y + 20) && (bullet.colour == #CE0C0C) ) 
+      {
+         println("UFO destroyed");
+         objects.remove(this);
+         bullets.remove(i);
+      }
+    } // end for()
+  }
+} // end class

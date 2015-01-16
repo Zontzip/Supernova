@@ -58,4 +58,4 @@ class Bullet
       alive = millis();
     }
   }
-}
+} // end class

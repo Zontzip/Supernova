@@ -1,4 +1,4 @@
-class Blackhole extends GameObject
+class Blackhole extends Entity
 {
   float orbitDuration = 5*1000; // 5 second orbit
   float orbitRad = 50;
@@ -29,4 +29,4 @@ class Blackhole extends GameObject
     line (x + 10, y, x + 5, y + 5);
     popMatrix();
   }
-}
+} // end class

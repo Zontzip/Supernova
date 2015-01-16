@@ -1,4 +1,4 @@
-class Ship extends GameObject
+class Ship extends Entity
 {
   float w, h;
   float speed;
@@ -93,5 +93,5 @@ class Ship extends GameObject
     line(0, 0, - halfWidth, halfHeight);
     popMatrix();
   }
-}
+} // end class
 

@@ -1,4 +1,4 @@
-class Star extends GameObject 
+class Star extends Entity 
 { 
   Star()
   {
@@ -15,5 +15,4 @@ class Star extends GameObject
     ellipse(x, y, 50, 50);
     popMatrix();
   }
-  
-}
+} // end class

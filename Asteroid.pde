@@ -1,4 +1,4 @@
-class Asteroid extends GameObject
+class Asteroid extends Entity
 {
   Asteroid()
   {
@@ -60,6 +60,6 @@ class Asteroid extends GameObject
          objects.remove(this);
          bullets.remove(i);
       }
-    }
+    } // end for()
   }
-}
+} // end class
