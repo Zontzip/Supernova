@@ -1,5 +1,8 @@
 class Asteroid extends GameObject
 {
+  float hitBoxX;
+  float hitBoxY;
+  
   Asteroid()
   {
     this.x = random(0, width);
@@ -21,6 +24,9 @@ class Asteroid extends GameObject
   void display()
   {
     pushMatrix();
+    stroke(#FF1515);
+    rect(x - 5, y - 5, 30, 30);
+    stroke(#18B0EA);
     line(x, y, x - 10, y + 20);
     line(x - 10, y + 20, x, y + 20);
     line(x, y + 20, x + 5, y + 15);
@@ -37,13 +43,13 @@ class Asteroid extends GameObject
   
   void die()
   {
-    for (int i = 0; i < objects.size(); i++) 
+    for (int i = 0; i < bullets.size(); i++) 
     {
-      GameObject bullet = objects.get(i);
-      if ( (bullet.x > x && bullet.x < x + 10) && (bullet.y > y && bullet.y < y + 10) ) 
+      Bullet bullet = (Bullet) bullets.get(i);
+      if ( (bullet.x > x - 5 && bullet.x < x + 30) && (bullet.y > y && bullet.y < y + 30) ) 
       {
-        println("hello");
-        objects.remove(this);
+         println("Asteroid destroyed");
+         objects.remove(this);
       }
     }
   }

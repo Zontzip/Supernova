@@ -1,11 +1,14 @@
-class Bullet extends GameObject
+class Bullet
 {
+  float x, y;
+  float theta;
   int alive = millis();
   
-  Bullet()
+  Bullet(float x, float y, float theta)
   {
-    x = width / 2;
-    y = height / 2;
+    this.x = x;
+    this.y = y;
+    this.theta = theta;
   }
   
   void move()
@@ -36,8 +39,8 @@ class Bullet extends GameObject
   {
     if (millis() - alive >= 5000) 
     {
-      println("Lazer offline");
-      objects.remove(this);
+      println("Laser offline");
+      bullets.remove(this);
       alive = millis();
     }
   }

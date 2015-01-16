@@ -58,11 +58,7 @@ class Ship extends GameObject
           player = minim.loadFile("laser.aiff", 2048);
           player.play();
           // Generate new bullet
-          Bullet bullet = new Bullet();
-          bullet.x = x;
-          bullet.y = y;
-          bullet.theta = theta;
-          objects.add(bullet);
+          bullets.add(new Bullet(x, y, theta));
           ellapsed = 0.0f;
         }
       }

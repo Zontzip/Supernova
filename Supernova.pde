@@ -1,4 +1,5 @@
 ArrayList<GameObject> objects = new ArrayList<GameObject>();
+ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 int i = 0;
 
 import ddf.minim.*;
@@ -38,8 +39,27 @@ void draw()
     objects.get(i).display();
     objects.get(i).die();
   } 
+  
+  for (int i = 0; i < bullets.size(); i++)
+  {
+    bullets.get(i).move();
+    bullets.get(i).display();
+    bullets.get(i).die();
+  }
 }
 
 void stop()
 {
 }
+
+void keyPressed() {
+  
+  if (keyCode == 'p') {
+    if (looping) {
+      noLoop();
+    }
+    else { 
+      loop();
+    }
+  } // end if()
+} // end keyPressed()
