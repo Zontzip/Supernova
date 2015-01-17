@@ -9,16 +9,16 @@ Minim minim;
 
 void setup() 
 {
-   size(1000, 800);
-   objects.add(new Ship(100, 100)); 
-   objects.add(new UFO());
-   //objects.add(new Star());
-   //objects.add(new Blackhole());
-   while (i < 4) 
-   {
-     objects.add(new Asteroid());
-     i++;
-   }
+  size(1000, 800);
+  //objects.add(new Ship(100, 100)); 
+  objects.add(new UFO());
+  objects.add(new Planet());
+  //objects.add(new Blackhole());
+  while (i < 10) 
+  {
+    objects.add(new Asteroid());
+    i++;
+  }
   
   minim = new Minim(this);
 }

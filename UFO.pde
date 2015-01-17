@@ -64,7 +64,7 @@ class UFO extends Entity
     ellipse(x, y, 60, 20);
     line(x - 15, y + 10, x - 20, y + 25);
     line(x + 15, y + 10, x + 20, y + 25);
-    curve(x - 10, y + 50, x - 10, y - 10, x + 10, y - 10, x + 10, y + 50);
+    bezier(x - 10, y - 10, x - 10, y - 50, x + 10, y - 50, x + 10, y - 10);
     popMatrix();
   }
   
@@ -74,7 +74,7 @@ class UFO extends Entity
     {
       Bullet bullet = (Bullet) bullets.get(i);
       // Check x, y coordinate and colour
-      if ( (bullet.x > x - 30 && bullet.x < x + 30) && (bullet.y > y - 20 && bullet.y < y + 20) && (bullet.colour == #CE0C0C) ) 
+      if ( (bullet.x > x - 30 && bullet.x < x + 30) && (bullet.y > y - 30 && bullet.y < y + 20) && (bullet.colour == #CE0C0C) ) 
       {
          println("UFO destroyed");
          objects.remove(this);

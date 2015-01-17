@@ -59,6 +59,7 @@ class Asteroid extends Entity
          println("Asteroid destroyed");
          objects.remove(this);
          bullets.remove(i);
+         objects.add(new Asteroid());
       }
     } // end for()
   }
