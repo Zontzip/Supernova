@@ -11,6 +11,8 @@ class Ship extends Entity
   float fireRate = 5.0f;
   float ellapsed = 0.0f;
   float toPass = 1.0f/fireRate;
+  
+  int health;
 
   Ship(float x, float y)
   {
@@ -24,6 +26,7 @@ class Ship extends Entity
     halfHeight = h / 2;
     colour = color(255);
     theta = 0;
+    health = 10;
   }
   
   void move()
@@ -92,6 +95,26 @@ class Ship extends Entity
     line(halfWidth, halfHeight, 0, 0);
     line(0, 0, - halfWidth, halfHeight);
     popMatrix();
+  }
+  
+  void die()
+  {
+    for (int i = 0; i < asteroids.size(); i++) 
+    {
+      Asteroid rock = (Asteroid) asteroids.get(i);
+      // Check x, y coordinate and colour
+      if ( (rock.x > x - 5 && rock.x < x + 30) && (rock.y > y - 5 && rock.y < y + 30) ) 
+      {
+         asteroids.remove(i);
+         //objects.add(new Shieldedsd(x, y));
+         // Sound effect
+         player = minim.loadFile("ufo_explosion.wav", 2048);
+         player.play();
+         
+         println("Ship damaged");
+         println("Health: " + health);
+      }
+    } // end for()
   }
 } // end class
 

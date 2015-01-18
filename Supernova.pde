@@ -35,7 +35,7 @@ void draw()
   background(0);
   strokeWeight(2);
   
-  for (int i = 0; i < objects.size() - 1; i ++)
+  for (int i = 0; i < objects.size(); i ++)
   {
     objects.get(i).move();
     objects.get(i).display();
@@ -60,7 +60,8 @@ void draw()
 
 void keyPressed() 
 {
-  if (keyCode == 'p') 
+  // Pause game
+  if (key == 'p') 
   {
     if (looping) {
       noLoop();
