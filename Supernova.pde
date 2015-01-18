@@ -1,5 +1,6 @@
 ArrayList<Entity> objects = new ArrayList<Entity>();
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
 int i = 0;
 
 import ddf.minim.*;
@@ -9,14 +10,15 @@ Minim minim;
 
 void setup() 
 {
-  size(1000, 800);
-  //objects.add(new Ship(100, 100)); 
+  size(1024, 768);
+  
+  objects.add(new Ship(100, 100)); 
   objects.add(new UFO());
   objects.add(new Planet());
   //objects.add(new Blackhole());
   while (i < 10) 
   {
-    objects.add(new Asteroid());
+    asteroids.add(new Asteroid());
     i++;
   }
   
@@ -47,10 +49,17 @@ void draw()
     bullets.get(i).display();
     bullets.get(i).die();
   }
+  
+  for (int i = 0; i < asteroids.size(); i++)
+  {
+    asteroids.get(i).move();
+    asteroids.get(i).display();
+    asteroids.get(i).die();
+  }
 }
 
-void keyPressed() {
-  
+void keyPressed() 
+{
   if (keyCode == 'p') 
   {
     if (looping) {

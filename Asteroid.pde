@@ -1,10 +1,13 @@
-class Asteroid extends Entity
+class Asteroid
 {
+  float x, y;
+  float theta;
+  
   Asteroid()
   {
-    this.x = width;
-    this.y = random(0, height);
-    this.theta = random (0, 6); 
+    x = width;
+    y = random(0, height);
+    theta = random (0, 6); 
   }
   
   void move()
@@ -32,7 +35,7 @@ class Asteroid extends Entity
   
   void display()
   {
-    stroke(#18B0EA);
+    stroke(#C2C2D6);
     
     pushMatrix();
     line(x, y, x - 10, y + 20);
@@ -57,9 +60,11 @@ class Asteroid extends Entity
       if ( (bullet.x > x - 5 && bullet.x < x + 30) && (bullet.y > y && bullet.y < y + 30) ) 
       {
          println("Asteroid destroyed");
-         objects.remove(this);
+         asteroids.remove(this);
          bullets.remove(i);
-         objects.add(new Asteroid());
+         asteroids.add(new Asteroid());
+         player = minim.loadFile("asteroid_explosion.wav", 2048);
+         player.play();
       }
     } // end for()
   }

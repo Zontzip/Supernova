@@ -12,6 +12,7 @@ class Planet extends Entity
     fill(#2BA6DE);
     ellipse(x, y, 100, 100);
     
+    // Left continent
     beginShape();
     fill(#007A29);
     curveVertex(x - 10, y - 45);
@@ -32,6 +33,7 @@ class Planet extends Entity
     curveVertex(x - 10, y - 45);
     endShape();
     
+    // Right Continent
     beginShape();
     fill(#007A29);
     curveVertex(x + 20, y - 30);
@@ -50,6 +52,7 @@ class Planet extends Entity
     curveVertex(x + 20, y - 30);
     endShape();
     
+    // Antarctic circle
     beginShape();
     fill(#FFFFFF);
     curveVertex(x - 5, y + 35);

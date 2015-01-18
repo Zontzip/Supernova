@@ -54,12 +54,12 @@ class Ship extends Entity
         break;  
       case ' ':
         if (ellapsed > toPass) {
-          // Sound effect
-          player = minim.loadFile("ship_laser.wav", 2048);
-          player.play();
           // Generate new bullet
           bullets.add(new Bullet(x, y, theta, 5000, #CE0C0C));
           ellapsed = 0.0f;
+          // Sound effect
+          player = minim.loadFile("ship_laser.wav", 2048);
+          player.play();
         }
       }
     
