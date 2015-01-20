@@ -13,6 +13,9 @@ class Ship extends Entity
   float toPass = 1.0f/fireRate;
   
   int health;
+  
+  float hitBoxX;
+  float hitBoxY;
 
   Ship(float x, float y)
   {
@@ -20,13 +23,20 @@ class Ship extends Entity
     this.y = y;
     this.x += 10;
     this.y += 10;
+    
     h = 20;
     w = 20;
     halfWidth = w / 2;
     halfHeight = h / 2;
+    
     colour = color(255);
+    
     theta = 0;
+    
     health = 10;
+    
+    hitBoxX = 10;
+    hitBoxY = 10;
   }
   
   void move()
@@ -103,7 +113,7 @@ class Ship extends Entity
     {
       Asteroid rock = (Asteroid) asteroids.get(i);
       // Check x, y coordinate and colour
-      if ( (rock.x > x - 5 && rock.x < x + 30) && (rock.y > y - 5 && rock.y < y + 30) ) 
+      if ( (rock.x + rock.hitBoxX > x && rock.x - 10 < x) && (rock.y + rock.hitBoxY > y && rock.y - 5 < y) ) 
       {
          asteroids.remove(i);
          //objects.add(new Shieldedsd(x, y));

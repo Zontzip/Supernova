@@ -3,11 +3,17 @@ class Asteroid
   float x, y;
   float theta;
   
+  float hitBoxX;
+  float hitBoxY;
+  
   Asteroid()
   {
     x = width;
     y = random(0, height);
     theta = random (0, 6); 
+    
+    hitBoxX = 30;
+    hitBoxY = 30;
   }
   
   void move()
@@ -49,7 +55,7 @@ class Asteroid
     line(x + 20, y, x + 15, y - 5);
     line(x + 15, y - 5, x + 10, y);
     line(x + 10, y, x, y);
-    rect(x, y, 20, 20);
+    //rect(x - 10, y - 5, 30, 30);
     popMatrix();
   }
   

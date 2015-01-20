@@ -4,9 +4,6 @@ class Entity
   float theta;
   color colour;
   
-  float hitBoxX;
-  float hitBoxY;
-  
   void move() {
   }
   
