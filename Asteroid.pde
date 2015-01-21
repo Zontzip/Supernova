@@ -8,7 +8,7 @@ class Asteroid
 
   Asteroid()
   {
-    x = random(0, width);
+    x = width;
     y = random(0, height);
     theta = random (0, 6);
   }
