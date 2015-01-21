@@ -16,14 +16,17 @@ class Bullet
     this.colour = colour;
   }
   
-  void move()
+  void update() 
   {
     float lx = sin(theta);
     float ly = -cos(theta);
     float speed = 10.0f;
     x += lx * speed;
     y += ly * speed;
-    
+  }
+  
+  void move()
+  {
     if (x < 0) {
         x = width; 
       }
@@ -45,7 +48,7 @@ class Bullet
     pushMatrix();
     translate(x, y);
     rotate(theta);
-    line(0, - 5, 0, 5);
+    line(0, 5, 0, -5);
     popMatrix();
   }
   

@@ -4,6 +4,9 @@ class Entity
   float theta;
   color colour;
   
+  void update() {
+  }
+    
   void move() {
   }
   

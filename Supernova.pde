@@ -13,7 +13,7 @@ void setup()
   size(1024, 768);
   
   objects.add(new Ship(100, 100)); 
-  objects.add(new UFO());
+  //ppobjects.add(new UFO());
   objects.add(new Planet());
   //objects.add(new Blackhole());
   while (i < 10) 
@@ -37,6 +37,7 @@ void draw()
   
   for (int i = 0; i < objects.size(); i ++)
   {
+    objects.get(i).update();
     objects.get(i).move();
     objects.get(i).display();
     objects.get(i).die();
@@ -45,6 +46,7 @@ void draw()
   
   for (int i = 0; i < bullets.size(); i++)
   {
+    bullets.get(i).update();
     bullets.get(i).move();
     bullets.get(i).display();
     bullets.get(i).die();
@@ -52,6 +54,7 @@ void draw()
   
   for (int i = 0; i < asteroids.size(); i++)
   {
+    asteroids.get(i).update();
     asteroids.get(i).move();
     asteroids.get(i).display();
     asteroids.get(i).die();

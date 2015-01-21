@@ -6,6 +6,8 @@ class UFO extends Entity
   float ellapsed = 0.0f;
   float toPass = 1.0f/fireRate;
   
+  float hitboxX, hitboxY, hitboxW, hitboxH;
+  
   UFO() 
   {
     this.x = random(0, width);
@@ -20,6 +22,11 @@ class UFO extends Entity
     float lx, ly;
     lx = sin(theta);
     ly = -cos(theta);
+    
+    hitboxX = x - 30;
+    hitboxY = y - 40;
+    hitboxW = x + 30;
+    hitboxH = y + 30;
     
     x += lx;
     y += ly;
@@ -58,13 +65,14 @@ class UFO extends Entity
   void display()
   {
     stroke(#33CC33);
-    fill(0);
+    noFill();
     
     pushMatrix();
     ellipse(x, y, 60, 20);
     line(x - 15, y + 10, x - 20, y + 25);
     line(x + 15, y + 10, x + 20, y + 25);
     bezier(x - 10, y - 10, x - 10, y - 50, x + 10, y - 50, x + 10, y - 10);
+    rect(hitboxX, hitboxY, 60, 60);
     popMatrix();
   }
   
@@ -74,7 +82,7 @@ class UFO extends Entity
     {
       Bullet bullet = (Bullet) bullets.get(i);
       // Check x, y coordinate and colour
-      if ( (bullet.x > x - 30 && bullet.x < x + 30) && (bullet.y > y - 30 && bullet.y < y + 20) && (bullet.colour == #CE0C0C) ) 
+      if ( (bullet.x > hitboxX && bullet.x < hitboxW) && (bullet.y > hitboxY && bullet.y < hitboxH) && (bullet.colour == #CE0C0C) ) 
       {
          println("UFO destroyed");
          objects.remove(this);

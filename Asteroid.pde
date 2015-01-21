@@ -2,47 +2,52 @@ class Asteroid
 {
   float x, y;
   float theta;
-  
-  float hitBoxX;
-  float hitBoxY;
-  
+  float lx, ly;
+
+  float hitboxX, hitboxY, hitboxW, hitboxH;
+
   Asteroid()
   {
-    x = width;
+    x = random(0, width);
     y = random(0, height);
-    theta = random (0, 6); 
-    
-    hitBoxX = 30;
-    hitBoxY = 30;
+    theta = random (0, 6);
   }
-  
-  void move()
+
+  void update()
   {
-    float lx, ly;
     lx = sin(theta);
     ly = -cos(theta);
-    
+
     x += lx;
     y += ly;
     
-    if (x < 0) {
-        x = width; 
-    }
-    if (x > width) {
-      x = 0; 
-    }
-    if (y < 0) {
-      y = height; 
-    }
-    if (y > height) {
-      y = 0; 
-    }
+    hitboxX = x - 10;
+    hitboxY = y - 5;
+    hitboxW = hitboxX + 30;
+    hitboxH = hitboxY + 25;
   }
-  
+
+    void move()
+    {
+      if (x < 0) {
+        x = width;
+      }
+      if (x > width) {
+        x = 0;
+      }
+      if (y < 0) {
+        y = height;
+      }
+      if (y > height) {
+        y = 0;
+      }
+    }
+
   void display()
   {
     stroke(#C2C2D6);
-    
+    noFill();
+
     pushMatrix();
     line(x, y, x - 10, y + 20);
     line(x - 10, y + 20, x, y + 20);
@@ -55,24 +60,27 @@ class Asteroid
     line(x + 20, y, x + 15, y - 5);
     line(x + 15, y - 5, x + 10, y);
     line(x + 10, y, x, y);
-    //rect(x - 10, y - 5, 30, 30);
+    quad(hitboxX, hitboxY, hitboxW, hitboxY, hitboxW, hitboxH, hitboxX, hitboxH);
     popMatrix();
   }
-  
+
   void die()
   {
-    for (int i = 0; i < bullets.size(); i++) 
+    for (int i = bullets.size() - 1; i >= 0; i--) 
     {
       Bullet bullet = (Bullet) bullets.get(i);
-      if ( (bullet.x > x - 5 && bullet.x < x + 30) && (bullet.y > y && bullet.y < y + 30) ) 
+      
+      if ( (bullet.x > x - 5 && bullet.x < x + 30) && (bullet.y > y && bullet.y < y + 30) )
       {
-         println("Asteroid destroyed");
-         asteroids.remove(this);
-         bullets.remove(i);
-         asteroids.add(new Asteroid());
-         player = minim.loadFile("asteroid_explosion.wav", 2048);
-         player.play();
+        println("Asteroid destroyed");
+        asteroids.remove(this);
+        bullets.remove(i);
+        asteroids.add(new Asteroid());
+        
+        player = minim.loadFile("asteroid_explosion.wav", 2048);
+        player.play();
       }
     } // end for()
   }
 } // end class
+

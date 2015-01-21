@@ -14,8 +14,9 @@ class Ship extends Entity
   
   int health;
   
-  float hitBoxX;
-  float hitBoxY;
+  float lx, ly;
+  
+  float hitboxX, hitboxY, hitboxW, hitboxH;
 
   Ship(float x, float y)
   {
@@ -34,20 +35,24 @@ class Ship extends Entity
     theta = 0;
     
     health = 10;
-    
-    hitBoxX = 10;
-    hitBoxY = 10;
   }
   
-  void move()
+  void update()
   {
     ellapsed += timeDelta;
     speed = 5;
     
-    float lx, ly;
     lx = sin(theta);
     ly = -cos(theta);
     
+    hitboxX = x - 10;
+    hitboxY = y - 10;
+    hitboxW = hitboxX + 20;
+    hitboxH = hitboxY + 20;
+  }
+  
+  void move()
+  {
     if (keyPressed)
     {
       switch (key)
@@ -74,7 +79,7 @@ class Ship extends Entity
           player = minim.loadFile("ship_laser.wav", 2048);
           player.play();
         }
-      }
+      } // end switch()
     
     // Screen boundry
       if (x < 0) {
@@ -88,9 +93,9 @@ class Ship extends Entity
       }
       if (y > height) {
         y = 0; 
-      }
-    }
-  }
+      } // end if()
+    } // end keypressed 
+  } // end move()
 
   void display()
   {
@@ -105,25 +110,29 @@ class Ship extends Entity
     line(halfWidth, halfHeight, 0, 0);
     line(0, 0, - halfWidth, halfHeight);
     popMatrix();
+    
+    //rect(hitboxX, hitboxY, 20, 20);
   }
   
   void die()
   {
     for (int i = 0; i < asteroids.size(); i++) 
     {
-      Asteroid rock = (Asteroid) asteroids.get(i);
-      // Check x, y coordinate and colour
-      if ( (rock.x + rock.hitBoxX > x && rock.x - 10 < x) && (rock.y + rock.hitBoxY > y && rock.y - 5 < y) ) 
+      Asteroid asteroid = (Asteroid) asteroids.get(i);
+      
+      if ( (asteroid.hitboxW > hitboxX) && (asteroid.hitboxX < hitboxW) && (asteroid.hitboxH > hitboxY) && (asteroid.hitboxY < hitboxH) ) 
       {
-         asteroids.remove(i);
-         //objects.add(new Shieldedsd(x, y));
-         // Sound effect
-         player = minim.loadFile("ufo_explosion.wav", 2048);
-         player.play();
+        asteroids.remove(i);
+        health--;
+        asteroids.add(new Asteroid());
+        //objects.add(new Shield(x, y));
+        // Sound effect
+        player = minim.loadFile("ship_explosion.wav", 2048);
+        player.play();
          
-         println("Ship damaged");
-         println("Health: " + health);
-      }
+        println("Ship damaged");
+        println("Health: " + health);
+      } // end if()
     } // end for()
   }
 } // end class
