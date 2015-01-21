@@ -1,9 +1,14 @@
 class Planet extends Entity 
 { 
+  float hitboxX, hitboxY, hitboxW, hitboxH;
+  
+  int health;
+  
   Planet()
   {
     this.x = width/2;
     this.y = height/2;
+    health = 10;
   }
   
   void display()
@@ -67,5 +72,32 @@ class Planet extends Entity
     curveVertex(x - 5, y + 35);
     curveVertex(x - 5, y + 35);
     endShape();
+  }
+  
+  void die()
+  {
+    hitboxX = x - 40;
+    hitboxY = y - 40;
+    hitboxW = x + 40;
+    hitboxH = y + 40;
+    
+    for (int i = 0; i < asteroids.size(); i++) 
+    {
+      Asteroid asteroid = (Asteroid) asteroids.get(i);
+      
+      if ( (asteroid.hitboxW > hitboxX) && (asteroid.hitboxX < hitboxW) && (asteroid.hitboxH > hitboxY) && (asteroid.hitboxY < hitboxH) ) 
+      {
+        asteroids.remove(i);
+        health--;
+        asteroids.add(new Asteroid());
+        //objects.add(new Shield(x, y));
+        // Sound effect
+        player = minim.loadFile("earth_explosion.wav", 2048);
+        player.play();
+         
+        println("Earth hit");
+        println("Earth health: " + health);
+      } // end if()
+    } // end for()
   }
 } // end class

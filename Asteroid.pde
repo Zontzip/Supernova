@@ -20,11 +20,6 @@ class Asteroid
 
     x += lx;
     y += ly;
-    
-    hitboxX = x - 10;
-    hitboxY = y - 5;
-    hitboxW = hitboxX + 30;
-    hitboxH = hitboxY + 25;
   }
 
     void move()
@@ -66,11 +61,16 @@ class Asteroid
 
   void die()
   {
+    hitboxX = x - 10;
+    hitboxY = y - 5;
+    hitboxW = hitboxX + 30;
+    hitboxH = hitboxY + 25;
+    
     for (int i = bullets.size() - 1; i >= 0; i--) 
     {
       Bullet bullet = (Bullet) bullets.get(i);
       
-      if ( (bullet.x > x - 5 && bullet.x < x + 30) && (bullet.y > y && bullet.y < y + 30) )
+      if ( (bullet.x > hitboxX && bullet.x < hitboxW) && (bullet.y > hitboxY && bullet.y < hitboxH) )
       {
         println("Asteroid destroyed");
         asteroids.remove(this);

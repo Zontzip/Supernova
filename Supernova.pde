@@ -13,7 +13,7 @@ void setup()
   size(1024, 768);
   
   objects.add(new Ship(100, 100)); 
-  //ppobjects.add(new UFO());
+  objects.add(new UFO());
   objects.add(new Planet());
   //objects.add(new Blackhole());
   while (i < 10) 
