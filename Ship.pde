@@ -2,9 +2,10 @@ class Ship extends Entity
 {
   float w, h;
   float speed;
-  
   float halfWidth;
   float halfHeight;
+  float hitboxX, hitboxY, hitboxW, hitboxH;
+  float lx, ly;
 
   // firerate variables
   float timeDelta = 1.0f/60.0f;
@@ -13,10 +14,6 @@ class Ship extends Entity
   float toPass = 1.0f/fireRate;
   
   int health;
-  
-  float lx, ly;
-  
-  float hitboxX, hitboxY, hitboxW, hitboxH;
 
   Ship(float x, float y)
   {
@@ -76,7 +73,7 @@ class Ship extends Entity
           bullets.add(new Bullet(x, y, theta, 5000, #CE0C0C));
           ellapsed = 0.0f;
           // Sound effect
-          player = minim.loadFile("ship_laser.wav", 2048);
+          player = sfx.loadFile("ship_laser.wav", 2048);
           player.play();
         }
       } // end switch()
@@ -127,7 +124,7 @@ class Ship extends Entity
         asteroids.add(new Asteroid());
         //objects.add(new Shield(x, y));
         // Sound effect
-        player = minim.loadFile("ship_explosion.wav", 2048);
+        player = sfx.loadFile("ship_explosion.wav", 2048);
         player.play();
          
         println("Ship damaged");

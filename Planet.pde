@@ -92,7 +92,7 @@ class Planet extends Entity
         asteroids.add(new Asteroid());
         //objects.add(new Shield(x, y));
         // Sound effect
-        player = minim.loadFile("earth_explosion.wav", 2048);
+        player = sfx.loadFile("earth_explosion.wav", 2048);
         player.play();
          
         println("Earth hit");

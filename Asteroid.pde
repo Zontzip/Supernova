@@ -77,7 +77,7 @@ class Asteroid
         bullets.remove(i);
         asteroids.add(new Asteroid());
         
-        player = minim.loadFile("asteroid_explosion.wav", 2048);
+        player = sfx.loadFile("asteroid_explosion.wav", 2048);
         player.play();
       }
     } // end for()

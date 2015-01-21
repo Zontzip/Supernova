@@ -2,6 +2,8 @@ class Bullet
 {
   float x, y;
   float theta;
+  float lx, ly;
+  float speed;
   
   int alive = millis();
   int lifeSpan;
@@ -18,9 +20,9 @@ class Bullet
   
   void update() 
   {
-    float lx = sin(theta);
-    float ly = -cos(theta);
-    float speed = 10.0f;
+    lx = sin(theta);
+    ly = -cos(theta);
+    speed = 10.0f;
     x += lx * speed;
     y += ly * speed;
   }
