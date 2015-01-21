@@ -69,16 +69,16 @@ class Ship extends Entity
         break;  
       case ' ':
         if (ellapsed > toPass) {
-          // Generate new bullet
+          // generate new bullet
           bullets.add(new Bullet(x, y, theta, 5000, #CE0C0C));
           ellapsed = 0.0f;
-          // Sound effect
+          // sound effect
           player = sfx.loadFile("ship_laser.wav", 2048);
           player.play();
         }
       } // end switch()
     
-    // Screen boundry
+    // screen boundraies
       if (x < 0) {
         x = width; 
       }
@@ -123,7 +123,7 @@ class Ship extends Entity
         health--;
         asteroids.add(new Asteroid());
         //objects.add(new Shield(x, y));
-        // Sound effect
+        // sound effect
         player = sfx.loadFile("ship_explosion.wav", 2048);
         player.play();
          

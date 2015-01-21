@@ -55,10 +55,10 @@ class UFO extends Entity
   void shoot() 
   {
     if (ellapsed > toPass) {
-        // Sound effect
+        // sound effect
         player = sfx.loadFile("ufo_laser.wav", 2048);
         player.play();
-        // Generate new bullet with random trajectory
+        // generate new bullet with random trajectory
         float thetaRandom = random (0, 6);
         bullets.add(new Bullet(x, y, thetaRandom, 1000, #F2FA14));
         ellapsed = 0.0f;
@@ -84,14 +84,14 @@ class UFO extends Entity
     for (int i = 0; i < bullets.size(); i++) 
     {
       Bullet bullet = (Bullet) bullets.get(i);
-      // Check x, y coordinate and colour
+      // check x, y coordinate and colour
       if ( (bullet.x > hitboxX && bullet.x < hitboxW) && (bullet.y > hitboxY && bullet.y < hitboxH) && (bullet.colour == #CE0C0C) ) 
       {
          println("UFO destroyed");
          ufos.remove(this);
          bullets.remove(i);
          objects.add(new Shield(x, y, #00FF00));
-         // Sound effect
+         // sound effect
          player = sfx.loadFile("ufo_explosion.wav", 2048);
          player.play();
       }

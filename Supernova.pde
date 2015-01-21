@@ -16,6 +16,7 @@ void setup()
 {
   size(1024, 768);
   
+  // obejct initialization
   ships.add(new Ship(100, 100)); 
   ufos.add(new UFO());
   objects.add(new Planet());
@@ -26,6 +27,7 @@ void setup()
     i++;
   }
   
+  // music initialization
   sfx = new Minim(this);
   gameMusic = new Minim(this);
   player = gameMusic.loadFile("gameMusic.mp3", 2048);
@@ -95,7 +97,7 @@ void stop()
 
 void keyPressed() 
 {
-  // Pause game
+  // pause game
   if (key == 'p') 
   {
     if (looping) {

@@ -23,6 +23,7 @@ class Shield extends Entity
   
   void move()
   {
+    // ship has not aquired shield
     if (pickup == false)
     {
       for (int i = ships.size() - 1; i >= 0; i--) 
@@ -41,7 +42,8 @@ class Shield extends Entity
         }
       } // end for()
     } // end if()
-      
+    
+    // ship has aquired shield
     if (pickup == true)
     {
       for (int i = 0; i < ships.size(); i++) 
@@ -52,7 +54,7 @@ class Shield extends Entity
         y = ship.y;
       }
     }
-  }
+  } // end move()
   
   void display()
   {
@@ -61,10 +63,16 @@ class Shield extends Entity
     
     if (pickup == false) {
       ellipse(x, y, 30, 30);
+      
     }
     
     if (pickup == true) {
+      fill(#99FF99,127);
       ellipse(x, y, 30, 30);
     }
+  }
+  
+  void die()
+  {
   }
 }
