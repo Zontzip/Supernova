@@ -1,6 +1,7 @@
 class Planet extends Entity 
 { 
   float hitboxX, hitboxY, hitboxW, hitboxH;
+  boolean alive;
   
   int health;
   
@@ -9,6 +10,7 @@ class Planet extends Entity
     this.x = width/2;
     this.y = height/2;
     health = 10;
+    alive = true;
   }
   
   void display()
@@ -80,6 +82,12 @@ class Planet extends Entity
     hitboxY = y - 40;
     hitboxW = x + 40;
     hitboxH = y + 40;
+    
+    if (health == 0)
+    {
+      alive = false;
+      objects.remove(this);
+    }
     
     for (int i = 0; i < asteroids.size(); i++) 
     {
