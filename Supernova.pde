@@ -3,6 +3,7 @@ ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
 ArrayList<UFO> ufos = new ArrayList<UFO>();
 ArrayList<Ship> ships = new ArrayList<Ship>();
+ArrayList<Shield> shields = new ArrayList<Shield>();
 
 int i = 0;
 
@@ -85,6 +86,14 @@ void draw()
     ufos.get(i).shoot();
     ufos.get(i).display();
     ufos.get(i).die();
+  }
+  
+  for (int i = 0; i < shields.size(); i++)
+  {
+    shields.get(i).update();
+    shields.get(i).move();
+    shields.get(i).display();
+    shields.get(i).die();
   }
 }
 

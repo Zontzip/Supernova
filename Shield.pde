@@ -1,14 +1,19 @@
 class Shield extends Entity
 {
   boolean pickup;
+  boolean alive;
   
   float hitboxX, hitboxY, hitboxW, hitboxH;
+  
+  int health;
   
   Shield(float x, float y, color colour) 
   {
     this.x = x;
     this.y = y;
     this.colour = colour;
+    
+    health = 10;
     
     pickup = false;
   }
@@ -62,8 +67,8 @@ class Shield extends Entity
     stroke(colour);
     
     if (pickup == false) {
+      fill(#99FF99,127);
       ellipse(x, y, 30, 30);
-      
     }
     
     if (pickup == true) {
@@ -74,5 +79,50 @@ class Shield extends Entity
   
   void die()
   {
-  }
-}
+    if (pickup == true) 
+    {
+      if (health == 0)
+      {
+        alive = false;
+        shields.remove(this);
+      }
+      
+      for (int i = 0; i < asteroids.size(); i++) 
+      {
+        Asteroid asteroid = (Asteroid) asteroids.get(i);
+        
+        if ( (asteroid.hitboxW > hitboxX) && (asteroid.hitboxX < hitboxW) && (asteroid.hitboxH > hitboxY) && (asteroid.hitboxY < hitboxH) ) 
+        {
+          asteroids.remove(i);
+          health--;
+          asteroids.add(new Asteroid());
+          // sound effect
+          player = sfx.loadFile("shield_explosion.wav", 2048);
+          player.play();
+           
+          println("Shield damaged");
+          println("Shield health: " + health);
+        } // end if()
+      } // end for()
+      
+      
+      for (int i = 0; i < bullets.size(); i++) 
+      {
+        Bullet bullet = (Bullet) bullets.get(i);
+        
+        if ( (bullet.x > hitboxX && bullet.x < hitboxW) && (bullet.y > hitboxY && bullet.y < hitboxH) && (bullet.colour != #CE0C0C) ) 
+        {
+          bullets.remove(i);
+          health--;
+          asteroids.add(new Asteroid());
+          // sound effect
+          player = sfx.loadFile("shield_explosion.wav", 2048);
+          player.play();
+           
+          println("Shield damaged");
+          println("Shield health: " + health);
+        } // end if()
+      } // end for()
+    } // end if()
+  } // end die()
+} // end shield

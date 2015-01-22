@@ -113,24 +113,46 @@ class Ship extends Entity
   
   void die()
   {
+    if (health == 0)
+    {
+      ships.remove(this);
+      println("Ship destroyed");
+    }
+    
+    // asteroid collision
     for (int i = 0; i < asteroids.size(); i++) 
     {
       Asteroid asteroid = (Asteroid) asteroids.get(i);
       
       if ( (asteroid.hitboxW > hitboxX) && (asteroid.hitboxX < hitboxW) && (asteroid.hitboxH > hitboxY) && (asteroid.hitboxY < hitboxH) ) 
       {
-        asteroids.remove(i);
         health--;
+        asteroids.remove(i);
         asteroids.add(new Asteroid());
-        //objects.add(new Shield(x, y));
         // sound effect
         player = sfx.loadFile("ship_explosion.wav", 2048);
         player.play();
-         
         println("Ship damaged");
         println("Health: " + health);
       } // end if()
     } // end for()
-  }
+    
+    // bullet collision
+    for (int i = 0; i < bullets.size(); i++) 
+    {
+      Bullet bullet = (Bullet) bullets.get(i);
+      // check x, y coordinate and colour
+      if ( (bullet.x > hitboxX && bullet.x < hitboxW) && (bullet.y > hitboxY && bullet.y < hitboxH) && (bullet.colour == #F2FA14) ) 
+      {
+        health--;
+        bullets.remove(i);
+        // sound effect
+        player = sfx.loadFile("ship_explosion.wav", 2048);
+        player.play();
+        println("Ship damaged");
+        println("Health: " + health);
+      }
+    }
+  } // end die()
 } // end class
 

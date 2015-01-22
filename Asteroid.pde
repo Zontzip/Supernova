@@ -55,7 +55,7 @@ class Asteroid
     line(x + 20, y, x + 15, y - 5);
     line(x + 15, y - 5, x + 10, y);
     line(x + 10, y, x, y);
-    quad(hitboxX, hitboxY, hitboxW, hitboxY, hitboxW, hitboxH, hitboxX, hitboxH);
+    //quad(hitboxX, hitboxY, hitboxW, hitboxY, hitboxW, hitboxH, hitboxX, hitboxH);
     popMatrix();
   }
 
