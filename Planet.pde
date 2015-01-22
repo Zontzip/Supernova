@@ -1,7 +1,6 @@
 class Planet extends Entity 
 { 
     float hitboxX, hitboxY, hitboxW, hitboxH;
-    boolean alive;
 
     int health;
 
@@ -10,8 +9,7 @@ class Planet extends Entity
         this.x = width/2;
         this.y = height/2;
 
-        health = 10;
-        alive = true;
+        health = 2;
     }
 
     void display()
@@ -85,7 +83,9 @@ class Planet extends Entity
         hitboxH = y + 40;
 
         if (health == 0) {
-            alive = false;
+            for (int i = 0; i < 5; i ++) {
+                objects.add(new Explosion(x, y));
+            }
             objects.remove(this);
         }
 
@@ -98,7 +98,7 @@ class Planet extends Entity
                 asteroids.add(new Asteroid());
 
                 // generate new impact site
-                objects.add(new Explosion(x, y));
+                objects.add(new EarthDamage(x, y));
 
                 // sound effect
                 player = sfx.loadFile("earth_explosion.wav", 2048);

@@ -4,26 +4,52 @@ class Explosion extends Entity
 
     Explosion(float x, float y)
     {
-        randX = random(x - 30, x + 30);
-        randY = random(y - 30, y + 30);
+        this.x = x;
+        this.y = y;
+        theta = random (0, 6);
+    }
+    
+    void update()
+    {
+        lx = sin(theta);
+        ly = -cos(theta);
+
+        x += lx;
+        y += ly;
+    }
+    
+    void move()
+    {
+        if (x < 0) {
+            x = width;
+        }
+        if (x > width) {
+            x = 0;
+        }
+        if (y < 0) {
+            y = height;
+        }
+        if (y > height) {
+            y = 0;
+        }
     }
 
     void display()
     {
-        beginShape();
-        stroke(#000000);
-        fill(#E68A5C);
-        curveVertex(randX - 2, randY + 10);
-        curveVertex(randX - 2, randY + 10);
-        curveVertex(randX + 2, randY + 11);
-        curveVertex(randX + 6, randY + 10);
-        curveVertex(randX + 4, randY + 14);
-        curveVertex(randX + 2, randY + 15);
-        curveVertex(randX + 2, randY + 16);
-        curveVertex(randX - 2, randY + 15);
-        curveVertex(randX - 6, randY + 14);
-        curveVertex(randX - 2, randY + 10);
-        curveVertex(randX - 2, randY + 10);
-        endShape(); 
+        stroke(#FF7373);
+        
+        pushMatrix();
+        line(x, y, x - 10, y + 20);
+        line(x - 10, y + 20, x, y + 20);
+        line(x, y + 20, x + 5, y + 15);
+        line(x + 5, y + 15, x + 15, y + 20);
+        line(x + 15, y + 20, x + 20, y + 20);
+        line(x + 20, y + 20, x + 15, y + 10);
+        line(x + 15, y + 10, x + 20, y + 20);
+        line(x + 15, y + 10, x + 20, y);
+        line(x + 20, y, x + 15, y - 5);
+        line(x + 15, y - 5, x + 10, y);
+        line(x + 10, y, x, y);
+        popMatrix();
     }
 }

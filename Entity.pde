@@ -2,6 +2,7 @@ class Entity
 {
     float x, y;
     float theta;
+    float lx, ly;
     color colour;
 
     void update() {
