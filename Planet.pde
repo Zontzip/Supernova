@@ -2,13 +2,14 @@ class Planet extends Entity
 { 
   float hitboxX, hitboxY, hitboxW, hitboxH;
   boolean alive;
-  
+
   int health;
   
   Planet()
   {
     this.x = width/2;
     this.y = height/2;
+    
     health = 10;
     alive = true;
   }
@@ -98,6 +99,10 @@ class Planet extends Entity
         asteroids.remove(i);
         health--;
         asteroids.add(new Asteroid());
+        
+        // generate new impact site
+        objects.add(new Explosion(x, y));
+    
         // sound effect
         player = sfx.loadFile("earth_explosion.wav", 2048);
         player.play();

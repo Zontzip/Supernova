@@ -68,7 +68,7 @@ class UFO extends Entity
   void display()
   {
     stroke(#33CC33);
-    noFill();
+    fill(#85FFFF);
     
     pushMatrix();
     ellipse(x, y, 60, 20);

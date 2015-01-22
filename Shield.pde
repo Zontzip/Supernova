@@ -31,12 +31,10 @@ class Shield extends Entity
     // ship has not aquired shield
     if (pickup == false)
     {
-      for (int i = ships.size() - 1; i >= 0; i--) 
-      {
+      for (int i = ships.size() - 1; i >= 0; i--) {
         Ship ship = (Ship) ships.get(i);
       
-        if ( (ship.x > hitboxX && ship.x < hitboxW) && (ship.y > hitboxY && ship.y < hitboxH) )
-        {
+        if ( (ship.x > hitboxX && ship.x < hitboxW) && (ship.y > hitboxY && ship.y < hitboxH) ) {
           println("Shield activated");
           ufos.add(new UFO());
           
