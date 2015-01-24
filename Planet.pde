@@ -94,8 +94,9 @@ class Planet extends Entity
 
             if ( (asteroid.hitboxW > hitboxX) && (asteroid.hitboxX < hitboxW) && (asteroid.hitboxH > hitboxY) && (asteroid.hitboxY < hitboxH) ) {
                 asteroids.remove(i);
-                health--;
                 asteroids.add(new Asteroid());
+                
+                health--;
 
                 // generate new impact site
                 objects.add(new EarthDamage(x, y));

@@ -36,20 +36,26 @@ class Explosion extends Entity
 
     void display()
     {
-        stroke(#FF7373);
+        stroke(#4C341C);
+        fill(#FFAD5C);
         
-        pushMatrix();
-        line(x, y, x - 10, y + 20);
-        line(x - 10, y + 20, x, y + 20);
-        line(x, y + 20, x + 5, y + 15);
-        line(x + 5, y + 15, x + 15, y + 20);
-        line(x + 15, y + 20, x + 20, y + 20);
-        line(x + 20, y + 20, x + 15, y + 10);
-        line(x + 15, y + 10, x + 20, y + 20);
-        line(x + 15, y + 10, x + 20, y);
-        line(x + 20, y, x + 15, y - 5);
-        line(x + 15, y - 5, x + 10, y);
-        line(x + 10, y, x, y);
-        popMatrix();
+        beginShape();
+        vertex(x + 0, y - 10);
+        vertex(x + 10, y - 10);
+        vertex(x + 10, y - 5);
+        vertex(x + 20, y - 5);
+        vertex(x + 20, y + 0);
+        vertex(x + 10, y + 0);
+        vertex(x + 10, y + 10);
+        vertex(x + 5, y + 10);
+        vertex(x + 5, y + 5);
+        vertex(x + 0, y + 5);
+        vertex(x + 0, y + 10);
+        vertex(x - 5, y + 10);
+        vertex(x - 5, y + 0);
+        vertex(x - 10, y + 0);
+        vertex(x - 10, y - 5);
+        vertex(x + 0, y - 5);
+        endShape();
     }
 }
