@@ -41,6 +41,7 @@ class Asteroid
     void display()
     {
         stroke(#C2C2D6);
+        strokeWeight(2);
         noFill();
 
         pushMatrix();

@@ -83,6 +83,10 @@ class Planet extends Entity
         hitboxH = y + 40;
 
         if (health == 0) {
+            for (int i = damages.size() - 1; i >= 0; i --) {
+                damages.remove(i);
+            }
+            
             for (int i = 0; i < 5; i ++) {
                 objects.add(new Explosion(x, y));
             }
@@ -99,7 +103,7 @@ class Planet extends Entity
                 health--;
 
                 // generate new impact site
-                objects.add(new EarthDamage(x, y));
+                damages.add(new EarthDamage(x, y));
 
                 // sound effect
                 player = sfx.loadFile("earth_explosion.wav", 2048);

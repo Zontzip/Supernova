@@ -4,7 +4,9 @@ ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
 ArrayList<UFO> ufos = new ArrayList<UFO>();
 ArrayList<Ship> ships = new ArrayList<Ship>();
 ArrayList<Shield> shields = new ArrayList<Shield>();
+ArrayList<EarthDamage> damages = new ArrayList<EarthDamage>();
 
+int currentScreen;
 int i = 0;
 
 import ddf.minim.*;
@@ -16,6 +18,8 @@ Minim gameMusic;
 void setup() 
 {
     size(1024, 768);
+    
+    currentScreen = 0;
   
     // obejct initialization
     ships.add(new Ship(100, 100)); 
@@ -44,7 +48,7 @@ void draw()
     background(0);
     strokeWeight(2);
   
-    for (int i = 0; i < objects.size(); i ++) {
+    for (i = 0; i < objects.size(); i ++) {
         objects.get(i).update();
         objects.get(i).move();
         objects.get(i).shoot();
@@ -52,7 +56,7 @@ void draw()
         objects.get(i).die();
       } 
   
-    for (int i = 0; i < ships.size(); i++) {
+    for (i = 0; i < ships.size(); i++) {
         ships.get(i).update();
         ships.get(i).move();
         ships.get(i).shoot();
@@ -60,21 +64,21 @@ void draw()
         ships.get(i).die();
     }
   
-    for (int i = 0; i < bullets.size(); i++) {
+    for (i = 0; i < bullets.size(); i++) {
         bullets.get(i).update();
         bullets.get(i).move();
         bullets.get(i).display();
         bullets.get(i).die();
     }
 
-    for (int i = 0; i < asteroids.size(); i++) {
+    for (i = 0; i < asteroids.size(); i++) {
         asteroids.get(i).update();
         asteroids.get(i).move();
         asteroids.get(i).display();
         asteroids.get(i).die();
     }
 
-    for (int i = 0; i < ufos.size(); i++) {
+    for (i = 0; i < ufos.size(); i++) {
         ufos.get(i).update();
         ufos.get(i).move();
         ufos.get(i).shoot();
@@ -82,11 +86,18 @@ void draw()
         ufos.get(i).die();
     }
 
-    for (int i = 0; i < shields.size(); i++) {
+    for (i = 0; i < shields.size(); i++) {
         shields.get(i).update();
         shields.get(i).move();
         shields.get(i).display();
         shields.get(i).die();
+    }
+    
+    for (i = 0; i < damages.size(); i++) {
+        damages.get(i).update();
+        damages.get(i).move();
+        damages.get(i).display();
+        damages.get(i).die();
     }
 }
 

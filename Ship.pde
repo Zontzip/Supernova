@@ -14,6 +14,8 @@ class Ship extends Entity
     float toPass = 1.0f/fireRate;
 
     int health;
+    
+    boolean move;
 
     Ship(float x, float y)
     {
@@ -32,6 +34,8 @@ class Ship extends Entity
         theta = 0;
 
         health = 10;
+        
+        move = false;
     }
 
     void update()
@@ -46,6 +50,8 @@ class Ship extends Entity
         hitboxY = y - 10;
         hitboxW = hitboxX + 20;
         hitboxH = hitboxY + 20;
+        
+        move = false;
     }
 
     void move()
@@ -55,6 +61,7 @@ class Ship extends Entity
                 case 'w':
                     x += lx * speed;
                     y += ly * speed;
+                    move = true;
                     break;
                 case 's':
                     y = y + speed;
@@ -94,16 +101,74 @@ class Ship extends Entity
 
     void display()
     {
-        stroke(colour);
-
-        // Ship
         pushMatrix();
+        
         translate(x, y);   
         rotate(theta);
-        line(-halfWidth, halfHeight, 0, - halfHeight);
-        line(0, - halfHeight, halfWidth, halfWidth);
-        line(halfWidth, halfHeight, 0, 0);
-        line(0, 0, - halfWidth, halfHeight);
+        
+        // Ship
+        stroke(#000000);
+        strokeWeight(1);
+        // hull
+	fill(#FFFF66);
+        beginShape();
+	curveVertex(0, - 20);
+	curveVertex(0, - 20);
+	curveVertex(8, - 10);
+	curveVertex(10, 0);
+	curveVertex(8, 10);
+	curveVertex(5, 20);
+	curveVertex(- 5, 20);
+	curveVertex(- 8, 10);
+	curveVertex(- 10, 0);
+	curveVertex(- 8, - 10);
+	curveVertex(0, - 20);
+	curveVertex(0, - 20);
+	endShape();
+
+		// windows
+	fill(#33CCFF);
+        ellipse(0, 0, 5, 5);
+	ellipse(0, 0 - 8, 5, 5);
+	ellipse(0, 0 + 8, 5, 5);
+
+	// left wing
+	fill(#FF5050);
+        beginShape();
+	curveVertex(- 8, 10);
+	curveVertex(- 8, 10);
+	curveVertex(- 13, 20);
+	curveVertex(- 15, 30);
+	curveVertex(- 10, 25);
+	curveVertex(- 5, 20);
+	curveVertex(- 8, 10);
+	curveVertex(- 8, 10);
+	endShape();
+
+	// right wing
+	beginShape();
+	curveVertex(8, 10);
+	curveVertex(8, 10);
+	curveVertex(13, 20);
+	curveVertex(15, 30);
+	curveVertex(10, 25);
+	curveVertex(5, 20);
+	curveVertex(8, 10);
+	curveVertex(8, 10);
+	endShape();
+        
+        if (move == true) { 
+            fill(#FFA971);
+            
+            beginShape();
+            curveVertex(- 5, 20);
+            curveVertex(- 5, 20);
+            curveVertex(0, 30);
+            curveVertex(5, 20);
+            curveVertex(5, 20);
+            endShape();
+        }
+
         popMatrix();
     }
 

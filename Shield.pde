@@ -20,10 +20,10 @@ class Shield extends Entity
 
     void update()
     {
-        hitboxX = x - 15;
-        hitboxY = y - 15;
-        hitboxW = x + 15;
-        hitboxH = y + 15;
+        hitboxX = x - 25;
+        hitboxY = y - 25;
+        hitboxW = x + 25;
+        hitboxH = y + 25;
     }
 
     void move()
@@ -69,7 +69,14 @@ class Shield extends Entity
 
         if (pickup == true) {
             fill(#99FF99,127);
-            ellipse(x, y, 30, 30);
+            
+            Ship ship = ships.get(0);
+
+            pushMatrix();
+            translate(x, y);   
+            rotate(ship.theta);
+            ellipse(0, 7, 40, 60);
+            popMatrix();
         }
     }
 
