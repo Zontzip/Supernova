@@ -76,6 +76,12 @@ class Asteroid
                 asteroids.add(new Asteroid());
                 player = sfx.loadFile("asteroid_explosion.wav", 2048);
                 player.play();
+                
+                if (bullet.colour == #CE0C0C) {
+                    score += 10;
+                }
+                
+                println("Score: " + score);
             }
         } 
     }

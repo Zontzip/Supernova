@@ -17,6 +17,7 @@ int GAME_OVER = 5;
 int PAUSED = 6;
 
 // globals
+int score;
 int gameState;
 int i;
 
@@ -54,6 +55,10 @@ void draw()
         // play game
         case 0: {
             strokeWeight(2);
+            
+            fill(#FFFFFF);
+            textSize(20);
+            text("Score: " + score, width * .9, height * .1);
           
             for (i = 0; i < objects.size(); i ++) {
                 objects.get(i).update();
@@ -106,30 +111,24 @@ void draw()
                 damages.get(i).display();
                 damages.get(i).die();
             }
+            
             break;
         }
         
         // menu
         case 1: {
             fill(#FFFFFF);
-            noFill();
-            stroke(#FFFFFF);
             textAlign(CENTER);
             
-            // play game
             fill(#FFFFFF);
             text("Play Game", width/2, height * .2);
-            //quad(width * .3, height * .15, width * .7, height * .15, width * .7, height * .2, width * .3, height * .2);
            
-            // highscores
             fill(#FFFFFF);
-            text("Highscores", width/2, height * .4);
+            text("High scores", width/2, height * .4);
             
-            // options
             fill(#FFFFFF);
             text("Options", width/2, height * .6);
             
-            // exit
             fill(#FFFFFF);
             text("Exit", width/2, height * .8);
             
@@ -138,17 +137,33 @@ void draw()
         
         // high scores
         case 2: {
+            textAlign(CENTER);
+            text("Highscores", width/2, height * 0.1);
+            
+            break;
+        }
+        
+        // options
+        case 3: {
+            
+            break;
         }
         
         // exit
-        case 3: {
+        case 4: {
             exit();
+        }
+        
+        // game over
+        case 5: {
+           
         }
     }
 }
 
 void gameInit()
 {
+    score = 0;
     // obejct initialization
     ships.add(new Ship(100, 100)); 
     ufos.add(new UFO());
@@ -220,19 +235,28 @@ void keyPressed()
 void mouseClicked() 
 {
     switch (gameState) {
+        // main menu mouse clicks
         case 1: {
-            // play gamep
             if ((mouseX > width * .3) && (mouseX < width * .7) && (mouseY > height * .1) && (mouseY < height * .2) ) {
-                fill(#33CC33);
                 gameState = PLAYING;
             }
             
-            // options
+            if ((mouseX > width * .3) && (mouseX < width * .7) && (mouseY > height * .3) && (mouseY < height * .4) ) {
+                gameState = HIGH_SCORE;
+            }
+            
+            if ((mouseX > width * .3) && (mouseX < width * .7) && (mouseY > height * .5) && (mouseY < height * .6) ) {
+                gameState = OPTIONS;
+            }
+            
+            if ((mouseX > width * .3) && (mouseX < width * .7) && (mouseY > height * .7) && (mouseY < height * .8) ) {
+                gameState = QUIT;
+            }
         }
         
+        // pause game mouse clicks
         case 6: {
             if ((mouseX > width * .3) && (mouseX < width * .7) && (mouseY > height * .6) && (mouseY < height * .8) ) {
-                println("Whaaaaaa");
                 gameState = MAIN_MENU;
                 purge();
                 gameInit();
