@@ -56,9 +56,13 @@ void draw()
         case 0: {
             strokeWeight(2);
             
+            // text update
             fill(#FFFFFF);
             textSize(20);
-            text("Score: " + score, width * .9, height * .1);
+            
+            Ship ship = (Ship) ships.get(0);
+            text("Lives: " + ship.health, width * .1, height * 0.05);
+            text("Score: " + score, width * .9, height * .05);
           
             for (i = 0; i < objects.size(); i ++) {
                 objects.get(i).update();
