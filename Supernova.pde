@@ -10,7 +10,11 @@ ArrayList<EarthDamage> damages = new ArrayList<EarthDamage>();
 // constants
 int PLAYING = 0;
 int MAIN_MENU = 1;
-int GAME_OVER = 2;
+int HIGH_SCORE = 2;
+int OPTIONS = 3;
+int QUIT = 4;
+int GAME_OVER = 5;
+int PAUSED = 6;
 
 // globals
 int gameState;
@@ -22,18 +26,33 @@ AudioPlayer player;
 Minim sfx;
 Minim gameMusic;
 
+// font
+PFont font;
+
 void setup() 
 {
     size(1024, 768);
   
     gameInit();
+    
+    // music initialization
+    sfx = new Minim(this);
+    gameMusic = new Minim(this);
+    player = gameMusic.loadFile("gameMusic.mp3", 2048);
+    player.play(); 
+   
+    // font
+    font = loadFont("8BITWONDERNominal-32.vlw");
+    textFont(font, 32); 
 }
 
 void draw()
 {
+    background(0);
+    
     switch(gameState) {
+        // play game
         case 0: {
-            background(0);
             strokeWeight(2);
           
             for (i = 0; i < objects.size(); i ++) {
@@ -90,11 +109,40 @@ void draw()
             break;
         }
         
+        // menu
         case 1: {
+            fill(#FFFFFF);
+            noFill();
+            stroke(#FFFFFF);
+            textAlign(CENTER);
+            
+            // play game
+            fill(#FFFFFF);
+            text("Play Game", width/2, height * .2);
+            //quad(width * .3, height * .15, width * .7, height * .15, width * .7, height * .2, width * .3, height * .2);
+           
+            // highscores
+            fill(#FFFFFF);
+            text("Highscores", width/2, height * .4);
+            
+            // options
+            fill(#FFFFFF);
+            text("Options", width/2, height * .6);
+            
+            // exit
+            fill(#FFFFFF);
+            text("Exit", width/2, height * .8);
+            
             break;
         }
         
+        // high scores
         case 2: {
+        }
+        
+        // exit
+        case 3: {
+            exit();
         }
     }
 }
@@ -105,19 +153,43 @@ void gameInit()
     ships.add(new Ship(100, 100)); 
     ufos.add(new UFO());
     objects.add(new Planet());
-    //objects.add(new Blackhole());
     while (i < 10) {
         asteroids.add(new Asteroid());
         i++;
     }
   
-    // music initialization
-    sfx = new Minim(this);
-    gameMusic = new Minim(this);
-    player = gameMusic.loadFile("gameMusic.mp3", 2048);
-    player.play();  
-  
-    gameState = 0;  
+    gameState = MAIN_MENU;  
+}
+
+void purge()
+{
+    for (i = objects.size() - 1; i >= 0; i--) {
+        objects.remove(i);
+    }
+    
+    for (i = ships.size() - 1; i >= 0; i--) {
+        ships.remove(i);
+    }
+    
+    for (i = bullets.size() - 1; i >= 0; i--) {
+        asteroids.remove(i);
+    }
+    
+    for (i = asteroids.size() - 1; i >= 0; i--) {
+        asteroids.remove(i);
+    }
+    
+    for (i = ufos.size() - 1; i >= 0; i--) {
+        ufos.remove(i);
+    }
+    
+    for (i = shields.size() - 1; i >= 0; i--) {
+        shields.remove(i);
+    }
+    
+    for (i = damages.size() - 1; i >= 0; i--) {
+        damages.remove(i);
+    }
 }
 
 void stop()
@@ -131,11 +203,41 @@ void stop()
 void keyPressed() 
 {
     // pause game
-    if (key == 'p') {
+    if (key == 'p' && gameState == PLAYING || gameState == PAUSED) {
         if (looping) {
-          noLoop();
-      } else { 
-        loop();
-      }
+            gameState = PAUSED;
+            noLoop();
+            fill(#FFFFFF);
+            text("Game paused", width/2, height * .4);
+            text("Main menu", width/2, height * .65);   
+            } else { 
+                gameState = PLAYING;
+                loop();
+            }
     }
 } // end keyPressed()
+
+void mouseClicked() 
+{
+    switch (gameState) {
+        case 1: {
+            // play gamep
+            if ((mouseX > width * .3) && (mouseX < width * .7) && (mouseY > height * .1) && (mouseY < height * .2) ) {
+                fill(#33CC33);
+                gameState = PLAYING;
+            }
+            
+            // options
+        }
+        
+        case 6: {
+            if ((mouseX > width * .3) && (mouseX < width * .7) && (mouseY > height * .6) && (mouseY < height * .8) ) {
+                println("Whaaaaaa");
+                gameState = MAIN_MENU;
+                purge();
+                gameInit();
+                loop();
+            }
+        }
+    }
+}
