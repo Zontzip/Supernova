@@ -156,11 +156,21 @@ void draw()
         // exit
         case 4: {
             exit();
+            
+            break;
         }
         
         // game over
         case 5: {
-           
+            fill(#FFFFFF);
+            textAlign(CENTER);
+            
+            textSize(38);
+            text("Game over", width/2, height * 0.4);
+            textSize(32);
+            text("Press R to return \n to main menu", width/2, height * 0.6);
+            
+            break; 
         }
     }
 }
@@ -221,17 +231,29 @@ void stop()
 
 void keyPressed() 
 {
-    // pause game
-    if (key == 'p' && gameState == PLAYING || gameState == PAUSED) {
-        if (looping) {
-            gameState = PAUSED;
-            noLoop();
-            fill(#FFFFFF);
-            text("Game paused", width/2, height * .4);
-            text("Main menu", width/2, height * .65);   
-            } else { 
-                gameState = PLAYING;
-                loop();
+    switch(gameState) {
+        // pause 
+        case 0: {
+                if (key == 'p' && gameState == PLAYING || gameState == PAUSED) {
+                    if (looping) {
+                    gameState = PAUSED;
+                    noLoop();
+                    fill(#FFFFFF);
+    
+                    text("Game paused", width/2, height * .4);
+                    text("Main menu", width/2, height * .65);   
+                } else { 
+                    gameState = PLAYING;
+                    loop();
+                }
+            }
+        }
+    
+            // game over continue
+            case 5: {
+                if (key == 'r') {
+                gameState = MAIN_MENU;
+                }
             }
     }
 } // end keyPressed()
@@ -256,6 +278,8 @@ void mouseClicked()
             if ((mouseX > width * .3) && (mouseX < width * .7) && (mouseY > height * .7) && (mouseY < height * .8) ) {
                 gameState = QUIT;
             }
+            
+            break;
         }
         
         // pause game mouse clicks
@@ -266,6 +290,8 @@ void mouseClicked()
                 gameInit();
                 loop();
             }
+            
+            break;
         }
     }
 }

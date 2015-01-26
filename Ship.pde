@@ -33,7 +33,7 @@ class Ship extends Entity
 
         theta = 0;
 
-        health = 10;
+        health = 1;
         
         move = false;
     }
@@ -177,6 +177,7 @@ class Ship extends Entity
         if (health == 0) {
             ships.remove(this);
             println("Ship destroyed");
+            gameState = GAME_OVER;
         }
 
         // asteroid collision
