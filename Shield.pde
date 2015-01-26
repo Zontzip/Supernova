@@ -111,7 +111,7 @@ class Shield extends Entity
             {
                 Bullet bullet = (Bullet) bullets.get(i);
 
-                if ( (bullet.x > hitboxX && bullet.x < hitboxW) && (bullet.y > hitboxY && bullet.y < hitboxH) && (bullet.colour != #CE0C0C) ) {
+                if ( (bullet.location.x > hitboxX && bullet.location.x < hitboxW) && (bullet.location.y > hitboxY && bullet.location.y < hitboxH) && (bullet.colour != #CE0C0C) ) {
                     bullets.remove(i);
                     health--;
                     asteroids.add(new Asteroid());

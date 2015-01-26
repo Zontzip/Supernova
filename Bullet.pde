@@ -1,45 +1,46 @@
 class Bullet
 {
-    float x, y;
     float theta;
-    float lx, ly;
     float speed;
 
     int alive = millis();
     int lifeSpan;
     color colour;
+    
+    PVector location;
+    PVector direction;
 
     Bullet(float x, float y, float theta, int lifeSpan, color colour)
     {
-        this.x = x;
-        this.y = y;
+        location = new PVector(x, y);
+        direction = new PVector(0, 0);
+        
         this.theta = theta;
         this.lifeSpan = lifeSpan;
         this.colour = colour;
+        
+        speed = 10.0f;
     }
 
     void update() 
     {
-        lx = sin(theta);
-        ly = -cos(theta);
-        speed = 10.0f;
-        x += lx * speed;
-        y += ly * speed;
+        direction.set(sin(theta) * speed, -cos(theta) * speed);
+        location.add(direction);
     }
 
     void move()
     {
-        if (x < 0) {
-            x = width; 
+        if (location.x < 0) {
+            location.x = width; 
           }
-        if (x > width) {
-            x = 0; 
+        if (location.x > width) {
+            location.x = 0; 
         }
-        if (y < 0) {
-          y = height; 
+        if (location.y < 0) {
+          location.y = height; 
         }
-        if (y > height) {
-          y = 0; 
+        if (location.y > height) {
+          location.y = 0; 
         }
     }
 
@@ -49,7 +50,7 @@ class Bullet
         strokeWeight(2);
         
         pushMatrix();
-        translate(x, y);
+        translate(location.x, location.y);
         rotate(theta);
         line(0, 5, 0, -5);
         popMatrix();

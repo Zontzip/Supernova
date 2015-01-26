@@ -5,17 +5,19 @@ class Asteroid
     float hitboxX, hitboxY, hitboxW, hitboxH;
     
     PVector location;
+    PVector direction;
     
-
     Asteroid()
     {
         location = new PVector(width, random(0, height));
+        direction = new PVector(0, 0);
         theta = random (0, 6);
     }
 
     void update()
     {
-        location.add(sin(theta), -cos(theta), 0);
+        direction.set(sin(theta), -cos(theta), 0);
+        location.add(direction);
     }
 
     void move()
@@ -65,7 +67,7 @@ class Asteroid
         for (int i = bullets.size() - 1; i >= 0; i--) {
             Bullet bullet = (Bullet) bullets.get(i);
 
-            if ( (bullet.x > hitboxX && bullet.x < hitboxW) && (bullet.y > hitboxY && bullet.y < hitboxH) ) {
+            if ( (bullet.location.x > hitboxX && bullet.location.x < hitboxW) && (bullet.location.y > hitboxY && bullet.location.y < hitboxH) ) {
                 println("Asteroid destroyed");
                 asteroids.remove(this);
                 bullets.remove(i);

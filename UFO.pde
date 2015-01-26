@@ -84,7 +84,7 @@ class UFO extends Entity
         for (int i = 0; i < bullets.size(); i++) {
             Bullet bullet = (Bullet) bullets.get(i);
             // check x, y coordinate and colour
-            if ( (bullet.x > hitboxX && bullet.x < hitboxW) && (bullet.y > hitboxY && bullet.y < hitboxH) && (bullet.colour == #CE0C0C) ) {
+            if ( (bullet.location.x > hitboxX && bullet.location.x < hitboxW) && (bullet.location.y > hitboxY && bullet.location.y < hitboxH) && (bullet.colour == #CE0C0C) ) {
                 println("UFO destroyed");
                 ufos.remove(this);
                 bullets.remove(i);

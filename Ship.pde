@@ -1,11 +1,8 @@
 class Ship extends Entity
 {
-    float w, h;
     float speed;
-    float halfWidth;
-    float halfHeight;
-    float hitboxX, hitboxY, hitboxW, hitboxH;
     float lx, ly;
+    float hitboxX, hitboxY, hitboxW, hitboxH;
 
     // firerate variables
     float timeDelta = 1.0f/60.0f;
@@ -15,7 +12,7 @@ class Ship extends Entity
 
     int health;
     
-    boolean move;
+    boolean move; 
 
     Ship(float x, float y)
     {
@@ -23,11 +20,6 @@ class Ship extends Entity
         this.y = y;
         this.x += 10;
         this.y += 10;
-
-        h = 20;
-        w = 20;
-        halfWidth = w / 2;
-        halfHeight = h / 2;
 
         colour = color(255);
 
@@ -201,7 +193,7 @@ class Ship extends Entity
         {
             Bullet bullet = (Bullet) bullets.get(i);
             // check x, y coordinate and colour
-            if ( (bullet.x > hitboxX && bullet.x < hitboxW) && (bullet.y > hitboxY && bullet.y < hitboxH) && (bullet.colour == #F2FA14) ) {
+            if ( (bullet.location.x > hitboxX && bullet.location.x < hitboxW) && (bullet.location.y > hitboxY && bullet.location.y < hitboxH) && (bullet.colour == #F2FA14) ) {
                 health--;
                 bullets.remove(i);
                 // sound effect
