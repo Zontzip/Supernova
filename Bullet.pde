@@ -46,6 +46,7 @@ class Bullet
     void display()
     {
         stroke(colour);
+        strokeWeight(2);
         
         pushMatrix();
         translate(x, y);
