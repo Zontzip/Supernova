@@ -253,6 +253,8 @@ void keyPressed()
             case 5: {
                 if (key == 'r') {
                 gameState = MAIN_MENU;
+                purge();
+                gameInit();
                 }
             }
     }

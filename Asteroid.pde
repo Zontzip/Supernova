@@ -1,40 +1,36 @@
 class Asteroid
 {
-    float x, y;
     float theta;
-    float lx, ly;
 
     float hitboxX, hitboxY, hitboxW, hitboxH;
+    
+    PVector location;
+    
 
     Asteroid()
     {
-        x = width;
-        y = random(0, height);
+        location = new PVector(width, random(0, height));
         theta = random (0, 6);
     }
 
     void update()
     {
-        lx = sin(theta);
-        ly = -cos(theta);
-
-        x += lx;
-        y += ly;
+        location.add(sin(theta), -cos(theta), 0);
     }
 
     void move()
     {
-        if (x < 0) {
-            x = width;
+        if (location.x < 0) {
+            location.x = width;
         }
-        if (x > width) {
-            x = 0;
+        if (location.x > width) {
+            location.x = 0;
         }
-        if (y < 0) {
-            y = height;
+        if (location.y < 0) {
+            location.y = height;
         }
-        if (y > height) {
-            y = 0;
+        if (location.y > height) {
+            location.y = 0;
         }
     }
 
@@ -43,26 +39,26 @@ class Asteroid
         stroke(#C2C2D6);
         strokeWeight(2);
         noFill();
-
+        
         pushMatrix();
-        line(x, y, x - 10, y + 20);
-        line(x - 10, y + 20, x, y + 20);
-        line(x, y + 20, x + 5, y + 15);
-        line(x + 5, y + 15, x + 15, y + 20);
-        line(x + 15, y + 20, x + 20, y + 20);
-        line(x + 20, y + 20, x + 15, y + 10);
-        line(x + 15, y + 10, x + 20, y + 20);
-        line(x + 15, y + 10, x + 20, y);
-        line(x + 20, y, x + 15, y - 5);
-        line(x + 15, y - 5, x + 10, y);
-        line(x + 10, y, x, y);
+        line(location.x, location.y, location.x - 10, location.y + 20);
+        line(location.x - 10, location.y + 20, location.x, location.y + 20);
+        line(location.x, location.y + 20, location.x + 5, location.y + 15);
+        line(location.x + 5, location.y + 15, location.x + 15, location.y + 20);
+        line(location.x + 15, location.y + 20, location.x + 20, location.y + 20);
+        line(location.x + 20, location.y + 20, location.x + 15, location.y + 10);
+        line(location.x + 15, location.y + 10, location.x + 20, location.y + 20);
+        line(location.x + 15, location.y + 10,location. x + 20, location.y);
+        line(location.x + 20, location.y, location.x + 15, location.y - 5);
+        line(location.x + 15, location.y - 5, location.x + 10, location.y);
+        line(location.x + 10, location.y, location.x, location.y);
         popMatrix();
     }
 
     void die()
     {
-        hitboxX = x - 10;
-        hitboxY = y - 5;
+        hitboxX = location.x - 10;
+        hitboxY = location.y - 5;
         hitboxW = hitboxX + 30;
         hitboxH = hitboxY + 25;
 
