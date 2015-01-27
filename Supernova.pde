@@ -11,7 +11,7 @@ ArrayList<EarthDamage> damages = new ArrayList<EarthDamage>();
 int PLAYING = 0;
 int MAIN_MENU = 1;
 int HIGH_SCORE = 2;
-int OPTIONS = 3;
+int INSTRUCTIONS = 3;
 int QUIT = 4;
 int GAME_OVER = 5;
 int PAUSED = 6;
@@ -121,6 +121,7 @@ void draw()
         
         // menu
         case 1: {
+            textSize(32);
             fill(#FFFFFF);
             textAlign(CENTER);
             
@@ -131,7 +132,7 @@ void draw()
             text("High scores", width/2, height * .4);
             
             fill(#FFFFFF);
-            text("Options", width/2, height * .6);
+            text("Instructions", width/2, height * .6);
             
             fill(#FFFFFF);
             text("Exit", width/2, height * .8);
@@ -152,7 +153,7 @@ void draw()
             break;
         }
         
-        // options
+        // instructions
         case 3: {
             textSize(48);
             textAlign(CENTER);
@@ -314,7 +315,7 @@ void mouseClicked()
             }
             
             if ((mouseX > width * .3) && (mouseX < width * .7) && (mouseY > height * .5) && (mouseY < height * .6) ) {
-                gameState = OPTIONS;
+                gameState = INSTRUCTIONS;
             }
             
             if ((mouseX > width * .3) && (mouseX < width * .7) && (mouseY > height * .7) && (mouseY < height * .8) ) {
