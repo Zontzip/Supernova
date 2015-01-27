@@ -211,10 +211,11 @@ void gameFlow()
             textAlign(CENTER);
             text("Highscores", width/2, height * 0.1);
             
+            // print high scores in order
             textSize(32);
             loadData();
             float j = 0.1;
-            for (i = 0; i < highScore.length; i++ ) {
+            for (i = highScore.length - 1; i >= 0; i--) {
                 text(highScore[i] + "    " + name[i], width/2, height * (0.1 + j) ); 
                 j += 0.05;
             }
@@ -277,16 +278,33 @@ void stop()
 
 // load file data
 void loadData() {
-  String[] lines = loadStrings("high_score.txt");
-  highScore = new int[lines.length];
-  name = new String[lines.length];
-  
-  for (int i = 0; i < lines.length; i++) 
-  {
-    String[] data = lines[i].split(",");
-    highScore[i] = int(data[0]);
-    name[i] = data[1];
-  }
+      String[] lines = loadStrings("high_score.txt");
+      highScore = new int[lines.length];
+      name = new String[lines.length];
+      
+      // parse data
+      for (int i = 0; i < lines.length; i++) 
+      {
+            String[] data = lines[i].split(",");
+            highScore[i] = int(data[0]);
+            name[i] = data[1];
+      }
+      
+      // insertion sort
+      for (i = 1; i < lines.length; i++) 
+      {
+          int temp = highScore[i];
+          String tempName = name[i];
+          int j;
+          
+          for(j = i - 1; j >= 0 && temp < highScore[j]; j--) 
+          {
+              highScore[j + 1] = highScore[j];
+              name[j + 1] = name[j];
+          }
+          highScore[j + 1] = temp;
+          name[j + 1] = tempName;
+      }
 }
 
 void keyPressed() 
