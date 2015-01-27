@@ -1,7 +1,5 @@
 class EarthDamage extends Entity
 {
-    PVector location;
-
     EarthDamage(float x, float y)
     {
         location = new PVector(random(x - 30, x + 30), random(y - 30, y + 30));

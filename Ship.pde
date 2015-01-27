@@ -1,7 +1,6 @@
 class Ship extends Entity
 {
     float speed;
-    float hitboxX, hitboxY, hitboxW, hitboxH;
 
     // firerate variables
     float timeDelta = 1.0f/60.0f;
@@ -12,9 +11,6 @@ class Ship extends Entity
     int health;
     
     boolean move; 
-    
-    PVector location;
-    PVector direction;
 
     Ship(float x, float y)
     {

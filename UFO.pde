@@ -5,11 +5,6 @@ class UFO extends Entity
     float fireRate = 1.0f;
     float ellapsed = 0.0f;
     float toPass = 1.0f/fireRate;
-    
-    float hitboxX, hitboxY, hitboxW, hitboxH;
-    
-    PVector location;
-    PVector direction;
 
     UFO() 
     {

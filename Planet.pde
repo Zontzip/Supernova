@@ -1,11 +1,5 @@
 class Planet extends Entity 
 { 
-    float hitboxX, hitboxY, hitboxW, hitboxH;
-
-    int health;
-    
-    PVector location;
-
     Planet()
     {
         location = new PVector(width/2, height/2);

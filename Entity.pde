@@ -1,7 +1,16 @@
 class Entity 
 {
-    float theta;
+    // constants
+    float hitboxX, hitboxY, hitboxW, hitboxH;
     color colour;
+    
+    // globals
+    int health;
+    float theta;
+    
+    // vectors
+    PVector location;
+    PVector direction;
 
     void update() {
     }

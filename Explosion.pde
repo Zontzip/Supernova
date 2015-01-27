@@ -1,8 +1,5 @@
 class Explosion extends Entity
 {
-    PVector location;
-    PVector direction;
-
     Explosion(float x, float y)
     {
         location = new PVector(x, y);

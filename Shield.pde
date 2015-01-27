@@ -3,13 +3,6 @@ class Shield extends Entity
     boolean pickup;
     boolean alive;
 
-    float hitboxX, hitboxY, hitboxW, hitboxH;
-
-    int health;
-    
-    PVector location;
-    PVector direction;
-
     Shield(float x, float y, color colour) 
     {
         location = new PVector(x, y);
