@@ -11,6 +11,8 @@ class Ship extends Entity
     int health;
     
     boolean move; 
+    boolean powerUp;
+    boolean shielded;
 
     Ship(float x, float y)
     {
@@ -19,8 +21,10 @@ class Ship extends Entity
 
         colour = color(255);
         theta = 0;
-        health = 1;
+        health = 3;
         move = false;
+        powerUp = false;
+        shielded = false;
         speed = 5.0f;
     }
 
@@ -58,7 +62,11 @@ class Ship extends Entity
                 case ' ':
                     if (ellapsed > toPass) {
                         // generate new bullet
-                        bullets.add(new Bullet(location.x, location.y, theta, 5000, #CE0C0C));
+                        if (powerUp == true) {
+                            bullets.add(new Bullet(location.x, location.y, theta, 10000, 16, #66FF66));
+                        }
+                        bullets.add(new Bullet(location.x, location.y, theta, 5000, 0, #CE0C0C));
+                        // set bullet timer
                         ellapsed = 0.0f;
                         // sound effect
                         player = sfx.loadFile("ship_laser.wav", 2048);
@@ -142,13 +150,27 @@ class Ship extends Entity
         
         if (move == true) { 
             fill(#FFA971);
-            
             beginShape();
             curveVertex(- 5, 20);
             curveVertex(- 5, 20);
             curveVertex(0, 30);
             curveVertex(5, 20);
             curveVertex(5, 20);
+            endShape();
+        }
+        
+        if (powerUp == true) {
+            // right power
+            fill(#33CC33);
+            beginShape();
+            vertex(10, -5);
+            vertex(12, -5);
+            vertex(12, -10);
+            vertex(18, -10);
+            vertex(18, 5);
+            vertex(12, 5);
+            vertex(12, 0);
+            vertex(10, 0);
             endShape();
         }
 

@@ -2,6 +2,8 @@ class Shield extends Entity
 {
     boolean pickup;
     boolean alive;
+    
+    Ship ship = ships.get(0);
 
     Shield(float x, float y, color colour) 
     {
@@ -9,7 +11,7 @@ class Shield extends Entity
         direction = new PVector(0, 0);
         
         this.colour = colour;
-        health = 10;
+        health = 5;
         pickup = false;
     }
 
@@ -26,11 +28,10 @@ class Shield extends Entity
         // ship has not aquired shield
         if (pickup == false) {
             for (int i = ships.size() - 1; i >= 0; i--) {
-                Ship ship = (Ship) ships.get(i);
 
-                if ( (ship.location.x > hitboxX && ship.location.x < hitboxW) && (ship.location.y > hitboxY && ship.location.y < hitboxH) ) {
+                if ( (ship.location.x > hitboxX && ship.location.x < hitboxW) && (ship.location.y > hitboxY && ship.location.y < hitboxH) && ship.shielded == false) {
                     println("Shield activated");
-                    ufos.add(new UFO());
+                    ship.shielded = true;
                     
                     // play sound
                     player = sfx.loadFile("shield_pickup.wav", 2048);
@@ -45,8 +46,6 @@ class Shield extends Entity
         if (pickup == true) {
             for (int i = 0; i < ships.size(); i++) 
             {
-                Ship ship = (Ship) ships.get(i);
-
                 location.x = ship.location.x;
                 location.y = ship.location.y;
             }
@@ -65,8 +64,6 @@ class Shield extends Entity
 
         if (pickup == true) {
             fill(#99FF99,127);
-            
-            Ship ship = ships.get(0);
 
             pushMatrix();
             translate(location.x, location.y);   
@@ -80,16 +77,19 @@ class Shield extends Entity
     {
         if (pickup == true) 
         {
-            if (health == 0)
-            {
+            // check if shield is alive
+            if (health == 0) {
                 alive = false;
                 shields.remove(this);
+                ship.shielded = false;
             }
-
+            
+            // check asteroid collision, reduce shield health, remove asteroid and add new asteroid
             for (int i = 0; i < asteroids.size(); i++) {
                 Asteroid asteroid = (Asteroid) asteroids.get(i);
 
-                if ( (asteroid.hitboxW > hitboxX) && (asteroid.hitboxX < hitboxW) && (asteroid.hitboxH > hitboxY) && (asteroid.hitboxY < hitboxH) ) {
+                if ( (asteroid.hitboxW > hitboxX) && (asteroid.hitboxX < hitboxW) && (asteroid.hitboxH > hitboxY) && (asteroid.hitboxY < hitboxH) ) 
+                {
                     asteroids.remove(i);
                     health--;
                     asteroids.add(new Asteroid());
@@ -102,12 +102,13 @@ class Shield extends Entity
                 } // end if()
             } // end for()
 
-
+            // check bullet collison, reduce shield health, remove asteroid and add new asteroid
             for (int i = 0; i < bullets.size(); i++) 
             {
                 Bullet bullet = (Bullet) bullets.get(i);
 
-                if ( (bullet.location.x > hitboxX && bullet.location.x < hitboxW) && (bullet.location.y > hitboxY && bullet.location.y < hitboxH) && (bullet.colour != #CE0C0C) ) {
+                if ( (bullet.location.x > hitboxX && bullet.location.x < hitboxW) && (bullet.location.y > hitboxY && bullet.location.y < hitboxH) && (bullet.colour == #F2FA14) ) 
+                {
                     bullets.remove(i);
                     health--;
                     asteroids.add(new Asteroid());

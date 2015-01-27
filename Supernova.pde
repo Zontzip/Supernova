@@ -51,6 +51,70 @@ void draw()
 {
     background(0);
     
+    updateLists();
+    gameFlow();
+}
+
+// initialise game objects
+void gameInit()
+{
+    score = 0;
+    // obejct initialization
+    ships.add(new Ship(width/2, height * .3)); 
+    ufos.add(new UFO());
+    objects.add(new Planet());
+    while (i < 10) {
+        asteroids.add(new Asteroid());
+        i++;
+    }
+  
+    gameState = MAIN_MENU;  
+}
+
+// remove all game objects
+void purge()
+{
+    for (i = objects.size() - 1; i >= 0; i--) {
+        objects.remove(i);
+    }
+    
+    for (i = ships.size() - 1; i >= 0; i--) {
+        ships.remove(i);
+    }
+    
+    for (i = bullets.size() - 1; i >= 0; i--) {
+        asteroids.remove(i);
+    }
+    
+    for (i = asteroids.size() - 1; i >= 0; i--) {
+        asteroids.remove(i);
+    }
+    
+    for (i = ufos.size() - 1; i >= 0; i--) {
+        ufos.remove(i);
+    }
+    
+    for (i = shields.size() - 1; i >= 0; i--) {
+        shields.remove(i);
+    }
+    
+    for (i = damages.size() - 1; i >= 0; i--) {
+        damages.remove(i);
+    }
+}
+
+// loop music
+void stop()
+{
+    // loop music
+    player.close();
+    gameMusic.stop();
+    super.stop();
+}
+
+// update and draw contents of arraylists
+void updateLists()
+{
     switch(gameState) {
         // play game
         case 0: {
@@ -118,7 +182,13 @@ void draw()
             
             break;
         }
-        
+    }
+}
+
+// update and draw current screen
+void gameFlow()
+{
+    switch(gameState) {
         // menu
         case 1: {
             textSize(32);
@@ -166,6 +236,7 @@ void draw()
             text("D : Rotate right", width/2, height * .4);
             text("S : Move down   ", width/2, height * .5);
             text("Space : shoot   ", width/2, height * .6);
+            text("P : pause game  ", width/2, height * .7);
             textAlign(CENTER);
             text("Press R to return...", width/2, height * 0.8);
            
@@ -194,71 +265,18 @@ void draw()
     }
 }
 
-void gameInit()
-{
-    score = 0;
-    // obejct initialization
-    ships.add(new Ship(100, 100)); 
-    ufos.add(new UFO());
-    objects.add(new Planet());
-    while (i < 10) {
-        asteroids.add(new Asteroid());
-        i++;
-    }
-  
-    gameState = MAIN_MENU;  
-}
-
-void purge()
-{
-    for (i = objects.size() - 1; i >= 0; i--) {
-        objects.remove(i);
-    }
-    
-    for (i = ships.size() - 1; i >= 0; i--) {
-        ships.remove(i);
-    }
-    
-    for (i = bullets.size() - 1; i >= 0; i--) {
-        asteroids.remove(i);
-    }
-    
-    for (i = asteroids.size() - 1; i >= 0; i--) {
-        asteroids.remove(i);
-    }
-    
-    for (i = ufos.size() - 1; i >= 0; i--) {
-        ufos.remove(i);
-    }
-    
-    for (i = shields.size() - 1; i >= 0; i--) {
-        shields.remove(i);
-    }
-    
-    for (i = damages.size() - 1; i >= 0; i--) {
-        damages.remove(i);
-    }
-}
-
-void stop()
-{
-    // loop music
-    player.close();
-    gameMusic.stop();
-    super.stop();
-}
-
 void keyPressed() 
 {
     switch(gameState) {
-        // pause 
+        // pause game
         case 0: {
                 if (key == 'p' && gameState == PLAYING || gameState == PAUSED) {
                     if (looping) {
                     gameState = PAUSED;
                     noLoop();
                     fill(#FFFFFF);
-    
+                    textSize(32);
+                    
                     text("Game paused", width/2, height * .4);
                     text("Main menu", width/2, height * .65);   
                 } else { 
@@ -270,6 +288,7 @@ void keyPressed()
             }
         }
         
+        // high score return to main menu
         case 2: {
             if (key == 'r') {
                 gameState = MAIN_MENU;
@@ -280,6 +299,7 @@ void keyPressed()
             break;
         }
         
+        // options return to main menu
         case 3: {
             if (key == 'r') {
                 gameState = MAIN_MENU;

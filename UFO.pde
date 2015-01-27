@@ -55,7 +55,7 @@ class UFO extends Entity
             player.play();
             // generate new bullet with random trajectory
             float thetaRandom = random (0, 6);
-            bullets.add(new Bullet(location.x, location.y, thetaRandom, 1000, #F2FA14));
+            bullets.add(new Bullet(location.x, location.y, thetaRandom, 1000, 0, #F2FA14));
             ellapsed = 0.0f;
         }
     }
@@ -82,11 +82,26 @@ class UFO extends Entity
                 println("UFO destroyed");
                 ufos.remove(this);
                 bullets.remove(i);
-                shields.add(new Shield(location.x, location.y, #00FF00));
+                    
+                powerUp();
                 // sound effect
                 player = sfx.loadFile("ufo_explosion.wav", 2048);
                 player.play();
             }
         } // end for()
+    }
+    
+    void powerUp() 
+    {
+        int randNum = int(random(0, 10));
+        
+        // add shield or powerup
+        if (randNum % 2 == 0) {
+            shields.add(new Shield(location.x, location.y, #00FF00));
+        } else {
+            Ship ship = ships.get(0);
+            ship.powerUp = true;
+        }
+        ufos.add(new UFO());
     }
 }

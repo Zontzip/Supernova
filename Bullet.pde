@@ -5,18 +5,20 @@ class Bullet
 
     int alive = millis();
     int lifeSpan;
+    int offset;
     color colour;
     
     PVector location;
     PVector direction;
 
-    Bullet(float x, float y, float theta, int lifeSpan, color colour)
+    Bullet(float x, float y, float theta, int lifeSpan, int offset, color colour)
     {
-        location = new PVector(x, y);
+        location = new PVector(x += offset, y);
         direction = new PVector(0, 0);
         
         this.theta = theta;
         this.lifeSpan = lifeSpan;
+        this.offset = offset;
         this.colour = colour;
         
         speed = 10.0f;
