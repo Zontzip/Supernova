@@ -43,8 +43,8 @@ void setup()
     player.play(); 
    
     // font
-    font = loadFont("8BITWONDERNominal-32.vlw");
-    textFont(font, 32); 
+    font = loadFont("VCROSDMono-48.vlw");
+    textFont(font, 48); 
 }
 
 void draw()
@@ -149,7 +149,8 @@ void draw()
         
         // options
         case 3: {
-            
+            textAlign(CENTER);
+            //text("W : move forward");
             break;
         }
         
