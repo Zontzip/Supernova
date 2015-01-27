@@ -5,14 +5,17 @@ class UFO extends Entity
     float fireRate = 1.0f;
     float ellapsed = 0.0f;
     float toPass = 1.0f/fireRate;
-
-    float lx, ly;
+    
     float hitboxX, hitboxY, hitboxW, hitboxH;
+    
+    PVector location;
+    PVector direction;
 
     UFO() 
     {
-        this.x = random(0, width);
-        this.y = random(0, height);
+        location = new PVector(random(0, width), random(0, height));
+        direction = new PVector(0, 0);
+        
         this.theta = random (0, 6); 
     }
 
@@ -20,34 +23,31 @@ class UFO extends Entity
     {
         ellapsed += timeDelta;
 
-        lx = sin(theta);
-        ly = -cos(theta);
+        direction.set(sin(theta), -cos(theta));
+        location.add(direction);
 
-        hitboxX = x - 30;
-        hitboxY = y - 40;
-        hitboxW = x + 30;
-        hitboxH = y + 30;
-
-        x += lx;
-        y += ly;
+        hitboxX = location.x - 30;
+        hitboxY = location.y - 40;
+        hitboxW = location.x + 30;
+        hitboxH = location.y + 30;
     }
 
     void move()
     {
-        if (x < 0) {
-            x = width; 
+        if (location.x < 0) {
+            location.x = width; 
             theta = random (0, 6);
         }
-        if (x > width) {
-            x = 0; 
+        if (location.x > width) {
+            location.x = 0; 
             theta = random (0, 6);
         }
-        if (y < 0) {
-            y = height; 
+        if (location.y < 0) {
+            location.y = height; 
             theta = random (0, 6);
         }
-        if (y > height) {
-            y = 0; 
+        if (location.y > height) {
+            location.y = 0; 
             theta = random (0, 6);
         }
     }
@@ -60,7 +60,7 @@ class UFO extends Entity
             player.play();
             // generate new bullet with random trajectory
             float thetaRandom = random (0, 6);
-            bullets.add(new Bullet(x, y, thetaRandom, 1000, #F2FA14));
+            bullets.add(new Bullet(location.x, location.y, thetaRandom, 1000, #F2FA14));
             ellapsed = 0.0f;
         }
     }
@@ -71,11 +71,10 @@ class UFO extends Entity
         fill(#85FFFF);
 
         pushMatrix();
-        ellipse(x, y, 60, 20);
-        line(x - 15, y + 10, x - 20, y + 25);
-        line(x + 15, y + 10, x + 20, y + 25);
-        bezier(x - 10, y - 10, x - 10, y - 50, x + 10, y - 50, x + 10, y - 10);
-        //rect(hitboxX, hitboxY, 60, 60);
+        ellipse(location.x, location.y, 60, 20);
+        line(location.x - 15, location.y + 10, location.x - 20, location.y + 25);
+        line(location.x + 15, location.y + 10, location.x + 20, location.y + 25);
+        bezier(location.x - 10, location.y - 10, location.x - 10, location.y - 50, location.x + 10, location.y - 50, location.x + 10, location.y - 10);
         popMatrix();
     }
 
@@ -88,7 +87,7 @@ class UFO extends Entity
                 println("UFO destroyed");
                 ufos.remove(this);
                 bullets.remove(i);
-                shields.add(new Shield(x, y, #00FF00));
+                shields.add(new Shield(location.x, location.y, #00FF00));
                 // sound effect
                 player = sfx.loadFile("ufo_explosion.wav", 2048);
                 player.play();

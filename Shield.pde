@@ -6,24 +6,26 @@ class Shield extends Entity
     float hitboxX, hitboxY, hitboxW, hitboxH;
 
     int health;
+    
+    PVector location;
+    PVector direction;
 
     Shield(float x, float y, color colour) 
     {
-        this.x = x;
-        this.y = y;
+        location = new PVector(x, y);
+        direction = new PVector(0, 0);
+        
         this.colour = colour;
-
         health = 10;
-
         pickup = false;
     }
 
     void update()
     {
-        hitboxX = x - 25;
-        hitboxY = y - 25;
-        hitboxW = x + 25;
-        hitboxH = y + 25;
+        hitboxX = location.x - 25;
+        hitboxY = location.y - 25;
+        hitboxW = location.x + 25;
+        hitboxH = location.y + 25;
     }
 
     void move()
@@ -33,10 +35,11 @@ class Shield extends Entity
             for (int i = ships.size() - 1; i >= 0; i--) {
                 Ship ship = (Ship) ships.get(i);
 
-                if ( (ship.x > hitboxX && ship.x < hitboxW) && (ship.y > hitboxY && ship.y < hitboxH) ) {
+                if ( (ship.location.x > hitboxX && ship.location.x < hitboxW) && (ship.location.y > hitboxY && ship.location.y < hitboxH) ) {
                     println("Shield activated");
                     ufos.add(new UFO());
-
+                    
+                    // play sound
                     player = sfx.loadFile("shield_pickup.wav", 2048);
                     player.play();
 
@@ -51,8 +54,8 @@ class Shield extends Entity
             {
                 Ship ship = (Ship) ships.get(i);
 
-                x = ship.x;
-                y = ship.y;
+                location.x = ship.location.x;
+                location.y = ship.location.y;
             }
         }
     } // end move()
@@ -64,7 +67,7 @@ class Shield extends Entity
 
         if (pickup == false) {
             fill(#99FF99,127);
-            ellipse(x, y, 30, 30);
+            ellipse(location.x, location.y, 30, 30);
         }
 
         if (pickup == true) {
@@ -73,7 +76,7 @@ class Shield extends Entity
             Ship ship = ships.get(0);
 
             pushMatrix();
-            translate(x, y);   
+            translate(location.x, location.y);   
             rotate(ship.theta);
             ellipse(0, 7, 40, 60);
             popMatrix();

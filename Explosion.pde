@@ -1,36 +1,35 @@
 class Explosion extends Entity
 {
-    float randX, randY;
+    PVector location;
+    PVector direction;
 
     Explosion(float x, float y)
     {
-        this.x = x;
-        this.y = y;
+        location = new PVector(x, y);
+        direction = new PVector(0, 0);
+        
         theta = random (0, 6);
     }
     
     void update()
     {
-        lx = sin(theta);
-        ly = -cos(theta);
-
-        x += lx;
-        y += ly;
+        direction.set(sin(theta), -cos(theta));
+        location.add(direction);
     }
     
     void move()
     {
-        if (x < 0) {
-            x = width;
+        if (location.x < 0) {
+            location.x = width;
         }
-        if (x > width) {
-            x = 0;
+        if (location.x > width) {
+            location.x = 0;
         }
-        if (y < 0) {
-            y = height;
+        if (location.y < 0) {
+            location.y = height;
         }
-        if (y > height) {
-            y = 0;
+        if (location.y > height) {
+            location.y = 0;
         }
     }
 
@@ -40,22 +39,22 @@ class Explosion extends Entity
         fill(#FFAD5C);
         
         beginShape();
-        vertex(x + 0, y - 10);
-        vertex(x + 10, y - 10);
-        vertex(x + 10, y - 5);
-        vertex(x + 20, y - 5);
-        vertex(x + 20, y + 0);
-        vertex(x + 10, y + 0);
-        vertex(x + 10, y + 10);
-        vertex(x + 5, y + 10);
-        vertex(x + 5, y + 5);
-        vertex(x + 0, y + 5);
-        vertex(x + 0, y + 10);
-        vertex(x - 5, y + 10);
-        vertex(x - 5, y + 0);
-        vertex(x - 10, y + 0);
-        vertex(x - 10, y - 5);
-        vertex(x + 0, y - 5);
+        vertex(location.x + 0, location.y - 10);
+        vertex(location.x + 10, location.y - 10);
+        vertex(location.x + 10, location.y - 5);
+        vertex(location.x + 20, location.y - 5);
+        vertex(location.x + 20, location.y + 0);
+        vertex(location.x + 10, location.y + 0);
+        vertex(location.x + 10, location.y + 10);
+        vertex(location.x + 5, location.y + 10);
+        vertex(location.x + 5, location.y + 5);
+        vertex(location.x + 0, location.y + 5);
+        vertex(location.x + 0, location.y + 10);
+        vertex(location.x - 5, location.y + 10);
+        vertex(location.x - 5, location.y + 0);
+        vertex(location.x - 10, location.y + 0);
+        vertex(location.x - 10, location.y - 5);
+        vertex(location.x + 0, location.y - 5);
         endShape();
     }
 }

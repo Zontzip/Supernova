@@ -1,7 +1,6 @@
 class Ship extends Entity
 {
     float speed;
-    float lx, ly;
     float hitboxX, hitboxY, hitboxW, hitboxH;
 
     // firerate variables
@@ -13,33 +12,30 @@ class Ship extends Entity
     int health;
     
     boolean move; 
+    
+    PVector location;
+    PVector direction;
 
     Ship(float x, float y)
     {
-        this.x = x;
-        this.y = y;
-        this.x += 10;
-        this.y += 10;
+        location = new PVector(x, y);
+        direction = new PVector(0, 0);
 
         colour = color(255);
-
         theta = 0;
-
         health = 1;
-        
         move = false;
+        speed = 5.0f;
     }
 
     void update()
     {
         ellapsed += timeDelta;
-        speed = 5;
+        
+        direction.set(sin(theta) * speed, -cos(theta) * speed);
 
-        lx = sin(theta);
-        ly = -cos(theta);
-
-        hitboxX = x - 10;
-        hitboxY = y - 10;
+        hitboxX = location.x - 10;
+        hitboxY = location.y - 10;
         hitboxW = hitboxX + 20;
         hitboxH = hitboxY + 20;
         
@@ -51,12 +47,11 @@ class Ship extends Entity
         if (keyPressed) {
             switch (key) {
                 case 'w':
-                    x += lx * speed;
-                    y += ly * speed;
+                    location.add(direction);
                     move = true;
                     break;
                 case 's':
-                    y = y + speed;
+                    location.y = location.y + speed;
                     break;
                 case 'a':
                     theta -= 0.15f;
@@ -67,7 +62,7 @@ class Ship extends Entity
                 case ' ':
                     if (ellapsed > toPass) {
                         // generate new bullet
-                        bullets.add(new Bullet(x, y, theta, 5000, #CE0C0C));
+                        bullets.add(new Bullet(location.x, location.y, theta, 5000, #CE0C0C));
                         ellapsed = 0.0f;
                         // sound effect
                         player = sfx.loadFile("ship_laser.wav", 2048);
@@ -76,17 +71,17 @@ class Ship extends Entity
               } // end switch()
 
             // screen boundraies
-            if (x < 0) {
-            x = width; 
+            if (location.x < 0) {
+                location.x = width; 
             }
-            if (x > width) {
-            x = 0; 
+            if (location.x > width) {
+                location.x = 0; 
             }
-            if (y < 0) {
-            y = height; 
+            if (location.y < 0) {
+                location.y = height; 
             }
-            if (y > height) {
-            y = 0; 
+            if (location.y > height) {
+                location.y = 0; 
             } // end if()
         } // end keypressed 
     } // end move()
@@ -95,7 +90,7 @@ class Ship extends Entity
     {
         pushMatrix();
         
-        translate(x, y);   
+        translate(location.x, location.y);   
         rotate(theta);
         
         // Ship

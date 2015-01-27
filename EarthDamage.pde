@@ -1,11 +1,10 @@
 class EarthDamage extends Entity
 {
-    float randX, randY;
+    PVector location;
 
     EarthDamage(float x, float y)
     {
-        randX = random(x - 30, x + 30);
-        randY = random(y - 30, y + 30);
+        location = new PVector(random(x - 30, x + 30), random(y - 30, y + 30));
     }
 
     void display()
@@ -14,17 +13,17 @@ class EarthDamage extends Entity
         fill(#E68A5C);
         
         beginShape();
-        curveVertex(randX - 2, randY + 10);
-        curveVertex(randX - 2, randY + 10);
-        curveVertex(randX + 2, randY + 11);
-        curveVertex(randX + 6, randY + 10);
-        curveVertex(randX + 4, randY + 14);
-        curveVertex(randX + 2, randY + 15);
-        curveVertex(randX + 2, randY + 16);
-        curveVertex(randX - 2, randY + 15);
-        curveVertex(randX - 6, randY + 14);
-        curveVertex(randX - 2, randY + 10);
-        curveVertex(randX - 2, randY + 10);
+        curveVertex(location.x - 2, location.y + 10);
+        curveVertex(location.x - 2, location.y + 10);
+        curveVertex(location.x + 2, location.y + 11);
+        curveVertex(location.x + 6, location.y + 10);
+        curveVertex(location.x + 4, location.y + 14);
+        curveVertex(location.x + 2, location.y + 15);
+        curveVertex(location.x + 2, location.y + 16);
+        curveVertex(location.x - 2, location.y + 15);
+        curveVertex(location.x - 6, location.y + 14);
+        curveVertex(location.x - 2, location.y + 10);
+        curveVertex(location.x - 2, location.y + 10);
         endShape(); 
     }
 }

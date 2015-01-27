@@ -3,11 +3,12 @@ class Planet extends Entity
     float hitboxX, hitboxY, hitboxW, hitboxH;
 
     int health;
+    
+    PVector location;
 
     Planet()
     {
-        this.x = width/2;
-        this.y = height/2;
+        location = new PVector(width/2, height/2);
 
         health = 2;
     }
@@ -16,79 +17,80 @@ class Planet extends Entity
     {
         stroke(#70EDF7);
         fill(#2BA6DE);
-        ellipse(x, y, 100, 100);
+        ellipse(location.x, location.y, 100, 100);
 
         // Left continent
         beginShape();
         fill(#007A29);
-        curveVertex(x - 10, y - 45);
-        curveVertex(x - 10, y - 45);
-        curveVertex(x - 5, y - 35);
-        curveVertex(x - 10, y - 20);
-        curveVertex(x - 15, y - 10);
-        curveVertex(x - 15, y);
-        curveVertex(x - 15, y + 10);
-        curveVertex(x - 15, y + 20);
-        curveVertex(x - 20, y + 30);
-        curveVertex(x - 30, y + 30);
-        curveVertex(x - 40, y + 10);
-        curveVertex(x - 45, y - 10);
-        curveVertex(x - 35, y - 25);
-        curveVertex(x - 25, y - 40);
-        curveVertex(x - 10, y - 45);
-        curveVertex(x - 10, y - 45);
+        curveVertex(location.x - 10, location.y - 45);
+        curveVertex(location.x - 10, location.y - 45);
+        curveVertex(location.x - 5, location.y - 35);
+        curveVertex(location.x - 10, location.y - 20);
+        curveVertex(location.x - 15, location.y - 10);
+        curveVertex(location.x - 15, location.y);
+        curveVertex(location.x - 15, location.y + 10);
+        curveVertex(location.x - 15, location.y + 20);
+        curveVertex(location.x - 20, location.y + 30);
+        curveVertex(location.x - 30, location.y + 30);
+        curveVertex(location.x - 40, location.y + 10);
+        curveVertex(location.x - 45, location.y - 10);
+        curveVertex(location.x - 35, location.y - 25);
+        curveVertex(location.x - 25, location.y - 40);
+        curveVertex(location.x - 10, location.y - 45);
+        curveVertex(location.x - 10, location.y - 45);
         endShape();
 
         // Right Continent
         beginShape();
         fill(#007A29);
-        curveVertex(x + 20, y - 30);
-        curveVertex(x + 20, y - 30);
-        curveVertex(x + 25, y - 25);
-        curveVertex(x + 30, y - 20);
-        curveVertex(x + 35, y - 10);
-        curveVertex(x + 35, y);
-        curveVertex(x + 30, y + 5);
-        curveVertex(x + 20, y + 10);
-        curveVertex(x + 15, y + 5);
-        curveVertex(x + 15, y - 5);
-        curveVertex(x + 10, y - 20);
-        curveVertex(x + 10, y - 30);
-        curveVertex(x + 20, y - 30);
-        curveVertex(x + 20, y - 30);
+        curveVertex(location.x + 20, location.y - 30);
+        curveVertex(location.x + 20, location.y - 30);
+        curveVertex(location.x + 25, location.y - 25);
+        curveVertex(location.x + 30, location.y - 20);
+        curveVertex(location.x + 35, location.y - 10);
+        curveVertex(location.x + 35, location.y);
+        curveVertex(location.x + 30, location.y + 5);
+        curveVertex(location.x + 20, location.y + 10);
+        curveVertex(location.x + 15, location.y + 5);
+        curveVertex(location.x + 15, location.y - 5);
+        curveVertex(location.x + 10, location.y - 20);
+        curveVertex(location.x + 10, location.y - 30);
+        curveVertex(location.x + 20, location.y - 30);
+        curveVertex(location.x + 20, location.y - 30);
         endShape();
 
         // Antarctic circle
         beginShape();
         fill(#FFFFFF);
-        curveVertex(x - 5, y + 35);
-        curveVertex(x - 5, y + 35);
-        curveVertex(x + 5, y + 38);
-        curveVertex(x + 15, y + 35);
-        curveVertex(x + 18, y + 40);
-        curveVertex(x + 10, y + 45);
-        curveVertex(x + 5, y + 48);
-        curveVertex(x - 5, y + 45);
-        curveVertex(x - 15, y + 40);
-        curveVertex(x - 5, y + 35);
-        curveVertex(x - 5, y + 35);
+        curveVertex(location.x - 5, location.y + 35);
+        curveVertex(location.x - 5, location.y + 35);
+        curveVertex(location.x + 5, location.y + 38);
+        curveVertex(location.x + 15, location.y + 35);
+        curveVertex(location.x + 18, location.y + 40);
+        curveVertex(location.x + 10, location.y + 45);
+        curveVertex(location.x + 5, location.y + 48);
+        curveVertex(location.x - 5, location.y + 45);
+        curveVertex(location.x - 15, location.y + 40);
+        curveVertex(location.x - 5, location.y + 35);
+        curveVertex(location.x - 5, location.y + 35);
         endShape();
     }
 
     void die()
     {
-        hitboxX = x - 40;
-        hitboxY = y - 40;
-        hitboxW = x + 40;
-        hitboxH = y + 40;
+        hitboxX = location.x - 40;
+        hitboxY = location.y - 40;
+        hitboxW = location.x + 40;
+        hitboxH = location.y + 40;
 
         if (health == 0) {
+            // remove Earth damage
             for (int i = damages.size() - 1; i >= 0; i --) {
                 damages.remove(i);
             }
-            
+            // add explosions
             for (int i = 0; i < 5; i ++) {
-                objects.add(new Explosion(x, y));
+                objects.add(new Explosion(location.x, location.y));
             }
             objects.remove(this);
         }
@@ -100,10 +102,11 @@ class Planet extends Entity
                 asteroids.remove(i);
                 asteroids.add(new Asteroid());
                 
+                // reduce Earth health
                 health--;
 
                 // generate new impact site
-                damages.add(new EarthDamage(x, y));
+                damages.add(new EarthDamage(location.x, location.y));
 
                 // sound effect
                 player = sfx.loadFile("earth_explosion.wav", 2048);
