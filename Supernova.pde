@@ -149,8 +149,18 @@ void draw()
         
         // options
         case 3: {
+            textSize(48);
             textAlign(CENTER);
-            //text("W : move forward");
+            text("Options", width/2, height * .1);
+            
+            textSize(32);
+            textAlign(RIGHT);
+            text("W : move forward", width/2, height * .3);
+            text("A : Rotate left ", width/2, height * .4); 
+            text("D : Rotate right", width/2, height * .5);
+            text("S : Move down   ", width/2, height * .6);
+            text("Space : shoot   ", width/2, height * .7);
+           
             break;
         }
         
