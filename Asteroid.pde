@@ -71,7 +71,15 @@ class Asteroid
                 println("Asteroid destroyed");
                 asteroids.remove(this);
                 bullets.remove(i);
+                
                 asteroids.add(new Asteroid());
+                
+                // add more asteroids based on score
+                int rand = int(random(0, 100));
+                if (score > 200 && rand % 7 == 0) {
+                    asteroids.add(new Asteroid());
+                }
+                
                 player = sfx.loadFile("asteroid_explosion.wav", 2048);
                 player.play();
                 

@@ -2,7 +2,7 @@ class UFO extends Entity
 {
     // firerate variables
     float timeDelta = 1.0f/60.0f;
-    float fireRate = 1.0f;
+    float fireRate = 2.0f;
     float ellapsed = 0.0f;
     float toPass = 1.0f/fireRate;
 
@@ -55,7 +55,7 @@ class UFO extends Entity
             player.play();
             // generate new bullet with random trajectory
             float thetaRandom = random (0, 6);
-            bullets.add(new Bullet(location.x, location.y, thetaRandom, 1000, 0, #F2FA14));
+            bullets.add(new Bullet(location.x, location.y, thetaRandom, 1000, 0, 10.0f, #F2FA14));
             ellapsed = 0.0f;
         }
     }
@@ -82,7 +82,8 @@ class UFO extends Entity
                 println("UFO destroyed");
                 ufos.remove(this);
                 bullets.remove(i);
-                    
+                
+                score += 50;    
                 powerUp();
                 // sound effect
                 player = sfx.loadFile("ufo_explosion.wav", 2048);

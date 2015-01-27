@@ -4,7 +4,7 @@ class Ship extends Entity
 
     // firerate variables
     float timeDelta = 1.0f/60.0f;
-    float fireRate = 5.0f;
+    float fireRate = 4.0f;
     float ellapsed = 0.0f;
     float toPass = 1.0f/fireRate;
 
@@ -63,9 +63,9 @@ class Ship extends Entity
                     if (ellapsed > toPass) {
                         // generate new bullet
                         if (powerUp == true) {
-                            bullets.add(new Bullet(location.x, location.y, theta, 10000, 16, #66FF66));
+                            bullets.add(new Bullet(location.x, location.y, theta, 5000, 16, 5.0f, #66FF66));
                         }
-                        bullets.add(new Bullet(location.x, location.y, theta, 5000, 0, #CE0C0C));
+                        bullets.add(new Bullet(location.x, location.y, theta, 1000, 0, 10.0f, #CE0C0C));
                         // set bullet timer
                         ellapsed = 0.0f;
                         // sound effect

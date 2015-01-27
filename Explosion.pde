@@ -1,17 +1,27 @@
 class Explosion extends Entity
 {
+    int savedTime;
+    int totalTime = 5000;
+    
     Explosion(float x, float y)
     {
         location = new PVector(x, y);
         direction = new PVector(0, 0);
         
         theta = random (0, 6);
+        
+        savedTime = millis();
     }
     
     void update()
     {
         direction.set(sin(theta), -cos(theta));
         location.add(direction);
+        
+        int passedTime = millis() - savedTime;
+        if (passedTime > totalTime) {
+            gameState = GAME_OVER;
+        }
     }
     
     void move()

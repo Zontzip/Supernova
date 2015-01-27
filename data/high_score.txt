@@ -1,3 +1,1 @@
-60,Alex
-70,Rian
-50,Greg
+1020,test

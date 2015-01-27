@@ -21,6 +21,7 @@ int score;
 int gameState;
 int i;
 int[] highScore;
+int currentHighScore;
 String[] name;
 
 // audio
@@ -37,7 +38,6 @@ void setup()
     size(1024, 768);
     
     loadData();
-    
     gameInit();
     
     // music initialization
@@ -184,22 +184,22 @@ void updateLists()
 void gameFlow()
 {
     switch(gameState) {
+        case 0: {
+            
+            break;
+        }
         // menu
         case 1: {
-            textSize(32);
+            textSize(48);
             fill(#FFFFFF);
             textAlign(CENTER);
             
-            fill(#FFFFFF);
+            text("SuperNova", width/2, height * .1);
+            
+            textSize(32);
             text("Play Game", width/2, height * .2);
-           
-            fill(#FFFFFF);
             text("High scores", width/2, height * .4);
-            
-            fill(#FFFFFF);
             text("Instructions", width/2, height * .6);
-            
-            fill(#FFFFFF);
             text("Exit", width/2, height * .8);
             
             break;
@@ -258,9 +258,14 @@ void gameFlow()
             textAlign(CENTER);
             
             textSize(38);
-            text("Game over", width/2, height * 0.4);
+            text("Game over", width/2, height * 0.3);
+            text("Score: " + score + "    Highscore: " + currentHighScore, width/2, height * 0.5);
+            if (score > currentHighScore) {
+                text("New high score!", width/2, height * 0.6);
+                writeData(score, "test");
+            }
             textSize(32);
-            text("Press R to return \n to main menu...", width/2, height * 0.6);
+            text("Press R to return \n to main menu...", width/2, height * 0.7);
             
             break; 
         }
@@ -305,6 +310,17 @@ void loadData() {
           highScore[j + 1] = temp;
           name[j + 1] = tempName;
       }
+      
+      currentHighScore = highScore[lines.length - 1];
+      println(currentHighScore);
+}
+
+void writeData(int score, String name)
+{
+    String[] info = new String[1];
+    String temp = str(score);
+    info[0] = (temp + "," + name);
+    saveStrings("data/high_score.txt", info);
 }
 
 void keyPressed() 
@@ -314,17 +330,17 @@ void keyPressed()
         case 0: {
                 if (key == 'p' && gameState == PLAYING || gameState == PAUSED) {
                     if (looping) {
-                    gameState = PAUSED;
-                    noLoop();
-                    fill(#FFFFFF);
-                    textSize(32);
-                    
-                    text("Game paused", width/2, height * .4);
-                    text("Main menu", width/2, height * .65);   
-                } else { 
-                    gameState = PLAYING;
-                    loop();
-                }
+                        gameState = PAUSED;
+                        noLoop();
+                        fill(#FFFFFF);
+                        textSize(32);
+                        
+                        text("Game paused", width/2, height * .4);
+                        text("Main menu", width/2, height * .65);   
+                    } else { 
+                        gameState = PLAYING;
+                        loop();
+                    }
                 
                 break;
             }
@@ -334,8 +350,6 @@ void keyPressed()
         case 2: {
             if (key == 'r') {
                 gameState = MAIN_MENU;
-                purge();
-                gameInit();
             }
             
             break;
