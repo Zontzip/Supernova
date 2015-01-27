@@ -161,11 +161,11 @@ void draw()
             
             textSize(32);
             textAlign(RIGHT);
-            text("W : move forward", width/2, height * .3);
-            text("A : Rotate left ", width/2, height * .4); 
-            text("D : Rotate right", width/2, height * .5);
-            text("S : Move down   ", width/2, height * .6);
-            text("Space : shoot   ", width/2, height * .7);
+            text("W : move forward", width/2, height * .2);
+            text("A : Rotate left ", width/2, height * .3); 
+            text("D : Rotate right", width/2, height * .4);
+            text("S : Move down   ", width/2, height * .5);
+            text("Space : shoot   ", width/2, height * .6);
             textAlign(CENTER);
             text("Press R to return...", width/2, height * 0.8);
            
