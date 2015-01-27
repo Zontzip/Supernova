@@ -141,8 +141,13 @@ void draw()
         
         // high scores
         case 2: {
+            textSize(48);
             textAlign(CENTER);
             text("Highscores", width/2, height * 0.1);
+            
+            textSize(32);
+            textAlign(CENTER);
+            text("Press R to return...", width/2, height * 0.8);
             
             break;
         }
@@ -160,6 +165,8 @@ void draw()
             text("D : Rotate right", width/2, height * .5);
             text("S : Move down   ", width/2, height * .6);
             text("Space : shoot   ", width/2, height * .7);
+            textAlign(CENTER);
+            text("Press R to return...", width/2, height * 0.8);
            
             break;
         }
@@ -179,7 +186,7 @@ void draw()
             textSize(38);
             text("Game over", width/2, height * 0.4);
             textSize(32);
-            text("Press R to return \n to main menu", width/2, height * 0.6);
+            text("Press R to return \n to main menu...", width/2, height * 0.6);
             
             break; 
         }
@@ -257,17 +264,39 @@ void keyPressed()
                     gameState = PLAYING;
                     loop();
                 }
+                
+                break;
             }
         }
-    
-            // game over continue
-            case 5: {
-                if (key == 'r') {
+        
+        case 2: {
+            if (key == 'r') {
                 gameState = MAIN_MENU;
                 purge();
                 gameInit();
-                }
             }
+            
+            break;
+        }
+        
+        case 3: {
+            if (key == 'r') {
+                gameState = MAIN_MENU;
+            }
+            
+            break;
+        }
+    
+        // game over continue
+        case 5: {
+            if (key == 'r') {
+                gameState = MAIN_MENU;
+                purge();
+                gameInit();
+            }
+            
+            break;
+        }
     }
 } // end keyPressed()
 
