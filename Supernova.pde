@@ -20,6 +20,8 @@ int PAUSED = 6;
 int score;
 int gameState;
 int i;
+int[] highScore;
+String[] name;
 
 // audio
 import ddf.minim.*;
@@ -33,7 +35,9 @@ PFont font;
 void setup() 
 {
     size(1024, 768);
-  
+    
+    loadData();
+    
     gameInit();
     
     // music initialization
@@ -101,15 +105,6 @@ void purge()
     for (i = damages.size() - 1; i >= 0; i--) {
         damages.remove(i);
     }
-}
-
-// loop music
-void stop()
-{
-    // loop music
-    player.close();
-    gameMusic.stop();
-    super.stop();
 }
 
 // update and draw contents of arraylists
@@ -217,7 +212,13 @@ void gameFlow()
             text("Highscores", width/2, height * 0.1);
             
             textSize(32);
-            textAlign(CENTER);
+            loadData();
+            float j = 0.1;
+            for (i = 0; i < highScore.length; i++ ) {
+                text(highScore[i] + "    " + name[i], width/2, height * (0.1 + j) ); 
+                j += 0.05;
+            }
+            
             text("Press R to return...", width/2, height * 0.8);
             
             break;
@@ -263,6 +264,29 @@ void gameFlow()
             break; 
         }
     }
+}
+
+// loop music
+void stop()
+{
+    // loop music
+    player.close();
+    gameMusic.stop();
+    super.stop();
+}
+
+// load file data
+void loadData() {
+  String[] lines = loadStrings("high_score.txt");
+  highScore = new int[lines.length];
+  name = new String[lines.length];
+  
+  for (int i = 0; i < lines.length; i++) 
+  {
+    String[] data = lines[i].split(",");
+    highScore[i] = int(data[0]);
+    name[i] = data[1];
+  }
 }
 
 void keyPressed() 
