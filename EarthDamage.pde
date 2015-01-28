@@ -8,20 +8,25 @@ class EarthDamage extends Entity
     void display()
     {
         stroke(#000000);
-        fill(#E68A5C);
         
+        fill(#000000);
         beginShape();
-        curveVertex(location.x - 4, location.y + 20);
-        curveVertex(location.x - 4, location.y + 20);
-        curveVertex(location.x + 4, location.y + 22);
-        curveVertex(location.x + 12, location.y + 20);
-        curveVertex(location.x + 8, location.y + 28);
-        curveVertex(location.x + 4, location.y + 30);
-        curveVertex(location.x + 4, location.y + 32);
-        curveVertex(location.x - 4, location.y + 30);
-        curveVertex(location.x - 12, location.y + 28);
-        curveVertex(location.x - 4, location.y + 20);
-        curveVertex(location.x - 4, location.y + 20);
-        endShape(); 
+        vertex(location.x + 0, location.y - 10);
+        vertex(location.x + 10, location.y - 10);
+        vertex(location.x + 10, location.y - 5);
+        vertex(location.x + 20, location.y - 5);
+        vertex(location.x + 20, location.y + 0);
+        vertex(location.x + 10, location.y + 0);
+        vertex(location.x + 10, location.y + 10);
+        vertex(location.x + 5, location.y + 10);
+        vertex(location.x + 5, location.y + 5);
+        vertex(location.x + 0, location.y + 5);
+        vertex(location.x + 0, location.y + 10);
+        vertex(location.x - 5, location.y + 10);
+        vertex(location.x - 5, location.y + 0);
+        vertex(location.x - 10, location.y + 0);
+        vertex(location.x - 10, location.y - 5);
+        vertex(location.x + 0, location.y - 5);
+        endShape();
     }
 }
