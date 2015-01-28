@@ -4,7 +4,7 @@ class Planet extends Entity
     {
         location = new PVector(width/2, height/2);
 
-        health = 2;
+        health = 3;
     }
 
     void display()
