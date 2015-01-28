@@ -197,10 +197,10 @@ void gameFlow()
             text("SuperNova", width/2, height * .1);
             
             textSize(32);
-            text("Play Game", width/2, height * .2);
+            text("Play Game", width/2, height * .3);
             text("High scores", width/2, height * .4);
-            text("Instructions", width/2, height * .6);
-            text("Exit", width/2, height * .8);
+            text("Instructions", width/2, height * .5);
+            text("Exit", width/2, height * .7);
             
             break;
         }
@@ -382,7 +382,7 @@ void mouseClicked()
     switch (gameState) {
         // main menu mouse clicks
         case 1: {
-            if ((mouseX > width * .3) && (mouseX < width * .7) && (mouseY > height * .1) && (mouseY < height * .2) ) {
+            if ((mouseX > width * .3) && (mouseX < width * .7) && (mouseY > height * .2) && (mouseY < height * .3) ) {
                 gameState = PLAYING;
             }
             
@@ -390,11 +390,11 @@ void mouseClicked()
                 gameState = HIGH_SCORE;
             }
             
-            if ((mouseX > width * .3) && (mouseX < width * .7) && (mouseY > height * .5) && (mouseY < height * .6) ) {
+            if ((mouseX > width * .3) && (mouseX < width * .7) && (mouseY > height * .4) && (mouseY < height * .5) ) {
                 gameState = INSTRUCTIONS;
             }
             
-            if ((mouseX > width * .3) && (mouseX < width * .7) && (mouseY > height * .7) && (mouseY < height * .8) ) {
+            if ((mouseX > width * .3) && (mouseX < width * .7) && (mouseY > height * .6) && (mouseY < height * .7) ) {
                 gameState = QUIT;
             }
             
